@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi7aj25brt7l6"]
+
+[ext_resource type="Texture2D" uid="uid://jjteh7iyvycr" path="res://icon.svg" id="1_survk"]
+
+[node name="Game" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 533.0
+offset_top = 226.0
+offset_right = 661.0
+offset_bottom = 354.0
+texture = ExtResource("1_survk")
