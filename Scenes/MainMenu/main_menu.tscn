@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://hmsibnj5eiwc"]
+
+[ext_resource type="Script" path="res://Scenes/MainMenu/button.gd" id="2_wp2eo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll8yg"]
+bg_color = Color(0.734253, 0.880168, 0.89486, 1)
+
+[sub_resource type="Theme" id="Theme_48cbw"]
+Button/styles/disabled = SubResource("StyleBoxFlat_ll8yg")
+Button/styles/focus = SubResource("StyleBoxFlat_ll8yg")
+Button/styles/hover = SubResource("StyleBoxFlat_ll8yg")
+Button/styles/normal = SubResource("StyleBoxFlat_ll8yg")
+Button/styles/pressed = SubResource("StyleBoxFlat_ll8yg")
+
+[sub_resource type="Theme" id="Theme_1by66"]
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 10
+RichTextLabel/constants/shadow_offset_x = 0
+RichTextLabel/constants/shadow_offset_y = 5
+RichTextLabel/constants/shadow_outline_size = 10
+RichTextLabel/font_sizes/normal_font_size = 100
+
+[sub_resource type="Theme" id="Theme_i2hhl"]
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.0823529)
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 2
+RichTextLabel/constants/shadow_offset_y = 2
+RichTextLabel/constants/shadow_outline_size = 7
+RichTextLabel/font_sizes/normal_font_size = 40
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_48cbw")
+action_mode = 0
+script = ExtResource("2_wp2eo")
+
+[node name="CenterContainer" type="CenterContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="RichTextLabel" parent="Button/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_1by66")
+text = "Monster Daycare"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Control" type="Control" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StartHint" type="RichTextLabel" parent="Button/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 374.4
+offset_top = 399.168
+offset_right = -372.096
+offset_bottom = -193.752
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_i2hhl")
+bbcode_enabled = true
+text = "[center]Tap to Start![/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
