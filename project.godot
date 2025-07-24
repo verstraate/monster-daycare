@@ -26,6 +26,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="New Game Project"
 
+[global_group]
+
+UI=""
+
 [rendering]
 
 renderer/rendering_method="mobile"
