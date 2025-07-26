@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://hmsibnj5eiwc"]
 
-[ext_resource type="Script" path="res://Scenes/MainMenu/button.gd" id="2_wp2eo"]
+[ext_resource type="Script" path="res://_Scenes/MainMenu/button.gd" id="2_wp2eo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll8yg"]
 bg_color = Color(0.734253, 0.880168, 0.89486, 1)
