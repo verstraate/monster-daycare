@@ -16,6 +16,15 @@ run/main_scene="res://_Scenes/MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Enums="*res://Scripts/Enums.gd"
+IdleNumber="*res://Scripts/IdleNumber.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/stretch/mode="canvas_items"
