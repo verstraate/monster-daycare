@@ -1,6 +1,6 @@
 extends Node
 
-var _num_places: Array[int] = [100]
+var _num_places: Array[int] = [0]
 
 func display_value(significant_figures: int = 3) -> String:
 	var highest_place: int = _num_places.back()
