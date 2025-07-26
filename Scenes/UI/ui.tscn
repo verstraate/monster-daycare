@@ -7,9 +7,9 @@
 
 [node name="MainScene" type="PanelContainer" parent="."]
 anchors_preset = -1
-anchor_right = 0.719
+anchor_right = 0.71
 anchor_bottom = 1.0
-offset_right = -0.288025
+offset_right = 0.0799561
 theme = ExtResource("1_dxera")
 
 [node name="MonsterShop" type="ColorRect" parent="."]
