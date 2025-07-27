@@ -12,9 +12,17 @@ config_version=5
 
 config/name="mobile_project"
 config/version="v0.1.0"
-run/main_scene="res://Scenes/MainMenu/main_menu.tscn"
+run/main_scene="res://_Scenes/MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Enums="*res://Scripts/Enums.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=0
 
 [display]
 
@@ -25,6 +33,11 @@ window/vsync/vsync_mode=0
 [dotnet]
 
 project/assembly_name="New Game Project"
+
+[global_group]
+
+UI=""
+Money=""
 
 [rendering]
 

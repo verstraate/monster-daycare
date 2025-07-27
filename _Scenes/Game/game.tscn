@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi7aj25brt7l6"]
+
+[ext_resource type="PackedScene" uid="uid://33dpkdbpx7lf" path="res://_Scenes/UI/ui.tscn" id="1_65hya"]
+[ext_resource type="PackedScene" uid="uid://ds0fdr74n7wjs" path="res://_Scenes/MoneyManager/money_manager.tscn" id="2_c7f46"]
+
+[node name="Game" type="Node2D"]
+
+[node name="UI" parent="." instance=ExtResource("1_65hya")]
+
+[node name="MoneyManager" parent="." instance=ExtResource("2_c7f46")]
