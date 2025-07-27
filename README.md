@@ -82,7 +82,7 @@ See the [open issues](https://github.com/verstraate/mobile-project-1/issues) for
 <!-- CONTACT -->
 ## Contact
 
-John Verstraate - ashuresyt@gmail.com
+John Verstraate - wilsjw2@student.op.ac.nz
 
 Project Link: [https://github.com/verstraate/mobile-project-1](https://github.com/verstraate/mobile-project-1)
 
