@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=5 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
+[ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
 [ext_resource type="Theme" uid="uid://cehswbxg4ymwm" path="res://_Scenes/Game/money_ui.tres" id="2_gu6w1"]
+[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="4_eusta"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
+script = ExtResource("1_ofums")
 
 [node name="MainScene" type="PanelContainer" parent="."]
 anchors_preset = -1
@@ -33,31 +36,36 @@ grow_vertical = 2
 [node name="Money" type="Panel" parent="."]
 offset_left = 15.0
 offset_top = 15.0
-offset_right = 215.0
+offset_right = 257.0
 offset_bottom = 115.0
 theme = ExtResource("2_gu6w1")
 
 [node name="MoneyIcon" type="TextureRect" parent="Money"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.045
-anchor_top = 0.08
-anchor_right = 0.46
-anchor_bottom = 0.91
+anchor_left = 0.062
+anchor_top = 0.14
+anchor_right = 0.351
+anchor_bottom = 0.84
+offset_left = -0.00400066
+offset_right = 0.0579987
 grow_vertical = 2
+texture = ExtResource("4_eusta")
+expand_mode = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Money"]
+[node name="MoneyLabel" type="RichTextLabel" parent="Money"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.985
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -105.0
+offset_left = -144.37
 offset_top = 22.0
-offset_right = -3.0
+offset_right = -9.0
 offset_bottom = -23.0
 theme = ExtResource("2_gu6w1")
-text = "10.3T"
+text = "10.3Tvg"
 scroll_active = false
 autowrap_mode = 0
 drag_and_drop_selection_enabled = false
