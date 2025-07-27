@@ -1,6 +1,9 @@
-extends Node
+class_name IdleNumber
 
-var _num_places: Array[int] = [0]
+var _num_places: Array[int]
+
+func _init() -> void:
+	_num_places = [0]
 
 func display_value(significant_figures: int = 3) -> String:
 	var highest_place: int = _num_places.back()
@@ -8,10 +11,12 @@ func display_value(significant_figures: int = 3) -> String:
 	
 	var result: String = str(highest_place)
 	
-	var _place_length: int = result.length()
-	if _place_length < significant_figures:
-		var second_highest_place: String = str(_num_places[_num_places.size() - 2]).pad_zeros(significant_figures)
-		result = "%s.%s" % [result, second_highest_place.substr(0, significant_figures - _place_length)]
+	var _result_length: int = result.length()
+	if _result_length < significant_figures and _num_places.size() > 1:
+		var substr_length: int = significant_figures - _result_length
+		var second_highest_place: String = str(_num_places[-2]).pad_zeros(3) # e.g., 123 -> 123, 12 -> 012, 1 -> 001
+		second_highest_place = second_highest_place.substr(0, substr_length)
+		result = "%s.%s" % [result, second_highest_place]
 	
 	return "%s%s" % [result, amount_suffix]
 
@@ -39,7 +44,7 @@ func add(value: String) -> void:
 	var _value_size: int = value_places.size()
 	
 	var carry: int = 0
-	while _temp_size > 0 or _value_size > 0:
+	while _temp_size > 0 or _value_size > 0 or carry > 0:
 		var curr_place: int = 0
 		
 		if _temp_size > 0:
