@@ -9,7 +9,7 @@ var starting_money: String
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
-	_money.add(starting_money)
+	adjust_money(starting_money)
 
 func get_money() -> IdleNumber:
 	return _money

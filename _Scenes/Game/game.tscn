@@ -8,3 +8,4 @@
 [node name="UI" parent="." instance=ExtResource("1_65hya")]
 
 [node name="MoneyManager" parent="." instance=ExtResource("2_c7f46")]
+starting_money = "0"
