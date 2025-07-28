@@ -1,7 +1,7 @@
 class_name MoneyManager
 extends Node2D
 
-var _money: IdleNumber = IdleNumber.new()
+var _money: IdleNumber
 
 @export
 var starting_money: String
@@ -9,7 +9,7 @@ var starting_money: String
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
-	_money.add(starting_money)
+	_money = IdleNumber.new(starting_money)
 
 func get_money() -> IdleNumber:
 	return _money
@@ -17,6 +17,9 @@ func get_money() -> IdleNumber:
 func adjust_money(value: String) -> void:
 	if value[0] == "-":
 		_money.subtract(value)
+	elif value[0] == "*":
+		var mult_amount: String = value.substr(1, value.length())
+		_money.multiply(float(mult_amount))
 	else:
 		_money.add(value)
 	

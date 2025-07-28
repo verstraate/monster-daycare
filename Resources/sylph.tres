@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://bqp3ucknwv2rc"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_ig1hl"]
+[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="2_sqm5i"]
+
+[resource]
+script = ExtResource("1_ig1hl")
+id = "sylph"
+display_name = "Sylph"
+sprite = ExtResource("2_sqm5i")
+base_produce = "1"
+base_upgrade = "10"
+base_upgrade_multiplier = 10.0
+type = 3

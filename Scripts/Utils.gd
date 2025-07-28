@@ -1,6 +1,6 @@
 extends Node
 
-enum BigNumberAmounts {
+enum NUMBER_SUFFIXES {
 	K,
 	M,
 	B,
@@ -34,4 +34,11 @@ enum BigNumberAmounts {
 	Tg,
 	Utg,
 	Dtg,
+}
+
+enum MONSTER_TYPES {
+	Fire,
+	Water,
+	Earth,
+	Air,
 }

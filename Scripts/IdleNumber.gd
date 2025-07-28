@@ -2,10 +2,10 @@ class_name IdleNumber
 
 var _num_places: Array[int]
 
-func _init() -> void:
-	_num_places = [0]
+func _init(starting_value: String = "0") -> void:
+	_num_places = num_to_array(starting_value)
 
-func display_value(significant_figures: int = 3) -> String:
+func display_value(significant_figures: int = 3, append_suffix: bool = true) -> String:
 	var highest_place: int = _num_places.back()
 	var amount_suffix: String = Enums.BigNumberAmounts.find_key(_num_places.size() - 2) if _num_places.size() > 1 else ""
 	
@@ -18,7 +18,7 @@ func display_value(significant_figures: int = 3) -> String:
 		second_highest_place = second_highest_place.substr(0, substr_length)
 		result = "%s.%s" % [result, second_highest_place]
 	
-	return "%s%s" % [result, amount_suffix]
+	return "%s%s" % [result, amount_suffix] if append_suffix else result
 
 static func num_to_array(large_num: String) -> Array[int]:
 	var arr: Array[int] = []
@@ -94,5 +94,31 @@ func subtract(value: String) -> void:
 			borrow = 0
 		
 		result.append(diff)
+	
+	_num_places = result
+	
+func multiply(value: float) -> void:
+	var result: Array[int] = []
+	
+	var temp_places: Array[int] = _num_places.duplicate()
+	var _temp_size: int = temp_places.size()
+	
+	var carry: int = 0
+	while _temp_size > 0 or carry > 0:
+		var curr_place: int = 0
+		
+		if _temp_size > 0:
+			curr_place += temp_places.pop_front()
+			_temp_size -= 1
+			curr_place *= value
+			
+		curr_place += carry
+		
+		# limit result to 1s, 10s and 100s places
+		# e.g., 9318 -> 318, carry: 9
+		carry = curr_place / 1000
+		curr_place %= 1000
+		
+		result.append(curr_place)
 	
 	_num_places = result
