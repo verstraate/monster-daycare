@@ -5,7 +5,7 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="UI" parent="." instance=ExtResource("1_65hya")]
-
 [node name="MoneyManager" parent="." instance=ExtResource("2_c7f46")]
-starting_money = "0"
+starting_money = "100"
+
+[node name="UI" parent="." instance=ExtResource("1_65hya")]
