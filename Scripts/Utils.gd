@@ -43,3 +43,5 @@ enum MONSTER_TYPES {
 	Earth,
 	Air,
 }
+
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
