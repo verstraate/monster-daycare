@@ -11,4 +11,4 @@ sprite = ExtResource("2_3oopk")
 base_produce = "1"
 base_upgrade = "10"
 base_upgrade_multiplier = 0.0
-type = 0
+type = 1
