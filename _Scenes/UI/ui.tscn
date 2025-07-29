@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=7 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
 [ext_resource type="Theme" uid="uid://cehswbxg4ymwm" path="res://_Scenes/Game/money_ui.tres" id="2_gu6w1"]
 [ext_resource type="Script" path="res://_Scenes/UI/enclosure_manager.gd" id="3_u7l7d"]
 [ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="4_eusta"]
-[ext_resource type="Resource" uid="uid://e5g167cihf4w" path="res://Resources/Enclosures/test.tres" id="4_f0rob"]
 [ext_resource type="Texture2D" uid="uid://b1ejn0q8u4s2i" path="res://Assets/Sprites/plus.png" id="7_g2t2n"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
@@ -20,7 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_dxera")
 script = ExtResource("3_u7l7d")
-test_enclosure = ExtResource("4_f0rob")
 swipe_threshold = 200
 swipe_duration = 0.3
 

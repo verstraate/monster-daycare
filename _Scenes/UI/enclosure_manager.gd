@@ -4,7 +4,6 @@ extends Control
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
-@export var test_enclosure: BaseEnclosure
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
 
@@ -18,8 +17,6 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
-	_add_enclosure()
-	_add_enclosure(test_enclosure)
 	_add_enclosure()
 
 func _process(delta: float) -> void:
@@ -72,4 +69,4 @@ func _handle_swipe() -> void:
 	selected_enclosure = next_enclosure
 
 func _on_add_enclosure_pressed() -> void:
-	_add_enclosure(null if enclosures.size() % 2 == 0 else test_enclosure)
+	_add_enclosure()
