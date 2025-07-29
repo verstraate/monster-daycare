@@ -1,19 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=6 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
 [ext_resource type="Theme" uid="uid://cehswbxg4ymwm" path="res://_Scenes/Game/money_ui.tres" id="2_gu6w1"]
+[ext_resource type="PackedScene" uid="uid://bpe832yd2m07l" path="res://_Scenes/Enclosure/Enclosure.tscn" id="3_ye8k5"]
 [ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="4_eusta"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_ofums")
 
-[node name="MainScene" type="PanelContainer" parent="."]
-anchors_preset = -1
+[node name="MainScene" type="Control" parent="."]
+layout_mode = 3
 anchor_right = 0.71
 anchor_bottom = 1.0
 offset_right = 0.0799561
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_dxera")
+
+[node name="Enclosure" parent="MainScene" instance=ExtResource("3_ye8k5")]
+layout_mode = 1
 
 [node name="MonsterShop" type="ColorRect" parent="."]
 anchors_preset = -1
