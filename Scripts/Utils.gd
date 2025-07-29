@@ -37,6 +37,7 @@ enum NUMBER_SUFFIXES {
 }
 
 enum MONSTER_TYPES {
+	Neutral,
 	Fire,
 	Water,
 	Earth,

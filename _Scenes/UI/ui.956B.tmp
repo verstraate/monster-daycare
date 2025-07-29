@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=7 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://_Scenes/UI/enclosure_manager.gd" id="3_u7l7d"]
 [ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="4_eusta"]
 [ext_resource type="Resource" uid="uid://e5g167cihf4w" path="res://Resources/Enclosures/test.tres" id="4_f0rob"]
-[ext_resource type="Texture2D" uid="uid://b1ejn0q8u4s2i" path="res://Assets/Sprites/plus.png" id="7_g2t2n"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
 script = ExtResource("1_ofums")
@@ -22,31 +21,9 @@ theme = ExtResource("1_dxera")
 script = ExtResource("3_u7l7d")
 test_enclosure = ExtResource("4_f0rob")
 swipe_threshold = 200
-swipe_duration = 0.3
-
-[node name="AddEnclosure" type="Button" parent="."]
-z_index = 10
-anchors_preset = -1
-anchor_left = 0.71
-anchor_right = 0.71
-offset_left = -109.92
-offset_top = 30.0
-offset_right = -29.92
-offset_bottom = 110.0
-theme = ExtResource("2_gu6w1")
-
-[node name="PlusIcon" type="TextureRect" parent="AddEnclosure"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_g2t2n")
+swipe_duration = 1.0
 
 [node name="MonsterShop" type="Panel" parent="."]
-z_index = 1
 texture_filter = 1
 anchors_preset = -1
 anchor_left = 0.71
@@ -66,7 +43,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Money" type="Panel" parent="."]
-z_index = 1
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 257.0
@@ -103,5 +79,3 @@ text = "10.3Tvg"
 scroll_active = false
 autowrap_mode = 0
 drag_and_drop_selection_enabled = false
-
-[connection signal="pressed" from="AddEnclosure" to="EnclosureManager" method="_on_add_enclosure_pressed"]

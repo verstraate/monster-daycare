@@ -7,7 +7,7 @@ func _init(starting_value: String = "0") -> void:
 
 func display_value(significant_figures: int = 3, append_suffix: bool = true) -> String:
 	var highest_place: int = _num_places.back()
-	var amount_suffix: String = Enums.BigNumberAmounts.find_key(_num_places.size() - 2) if _num_places.size() > 1 else ""
+	var amount_suffix: String = Utils.NUMBER_SUFFIXES.find_key(_num_places.size() - 2) if _num_places.size() > 1 else ""
 	
 	var result: String = str(highest_place)
 	

@@ -28,15 +28,15 @@
 <br />
 <div align="center">
   <a href="https://github.com/verstraate/mobile-project-1">
-    <img src="Assets/Sprites/money.png" alt="Logo" width="80" height="80">
+	<img src="Assets/Sprites/money.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Monster Daycare</h3>
 
   <p align="center">
-    Train monsters to compete in competitions to earn money. Become the best trainer around!
-    <br />
-    <a href="https://github.com/verstraate/mobile-project-1"><strong>Explore the docs »</strong></a>
+	Train monsters to compete in competitions to earn money. Become the best trainer around!
+	<br />
+	<a href="https://github.com/verstraate/mobile-project-1"><strong>Explore the docs »</strong></a>
   </p>
 </div>
 
@@ -46,8 +46,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contact">Contact</a></li>
+	<li><a href="#roadmap">Roadmap</a></li>
+	<li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
@@ -66,11 +66,11 @@
 ## Roadmap
 
 - [ ] Create monsters
-    - [ ] Monster resources
-    - [ ] Monster instance
-    - [ ] Purchase a monster
-    - [ ] Generate currency
-- [ ] Create monster enclosures
+	- [ ] Monster resources
+	- [ ] Monster instance
+	- [ ] Purchase a monster
+	- [ ] Generate currency
+- [x] Create monster enclosures
 - [ ] Set up monster type preferences (between monsters in enclosure)
 
 See the [open issues](https://github.com/verstraate/mobile-project-1/issues) for a full list of proposed features (and known issues).

@@ -1,6 +1,51 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cehswbxg4ymwm"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cehswbxg4ymwm"]
 
 [ext_resource type="FontFile" uid="uid://dqvbym68fy33l" path="res://Assets/Fonts/pixel.ttf" id="1_qfqp5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oosd0"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ketr2"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rydr7"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqwnn"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1sl8o"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdfga"]
 bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
@@ -12,6 +57,11 @@ shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
 shadow_size = 5
 
 [resource]
+Button/styles/disabled = SubResource("StyleBoxFlat_oosd0")
+Button/styles/focus = SubResource("StyleBoxFlat_ketr2")
+Button/styles/hover = SubResource("StyleBoxFlat_rydr7")
+Button/styles/normal = SubResource("StyleBoxFlat_mqwnn")
+Button/styles/pressed = SubResource("StyleBoxFlat_1sl8o")
 Panel/styles/panel = SubResource("StyleBoxFlat_jdfga")
 RichTextLabel/colors/default_color = Color(0.95, 0.910417, 0.855, 1)
 RichTextLabel/colors/font_outline_color = Color(0.7, 0.35, 0, 1)
