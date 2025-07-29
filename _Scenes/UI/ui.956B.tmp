@@ -21,10 +21,9 @@ theme = ExtResource("1_dxera")
 script = ExtResource("3_u7l7d")
 test_enclosure = ExtResource("4_f0rob")
 swipe_threshold = 200
-swipe_duration = 0.3
+swipe_duration = 1.0
 
 [node name="MonsterShop" type="Panel" parent="."]
-z_index = 1
 texture_filter = 1
 anchors_preset = -1
 anchor_left = 0.71
@@ -44,7 +43,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Money" type="Panel" parent="."]
-z_index = 1
 offset_left = 15.0
 offset_top = 15.0
 offset_right = 257.0

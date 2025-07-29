@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BaseEnclosure" load_steps=3 format=3 uid="uid://v4ogcdkarrgs"]
+
+[ext_resource type="Texture2D" uid="uid://dvvogl73722t3" path="res://Assets/Sprites/enclosure_plains.png" id="1_g8rmc"]
+[ext_resource type="Script" path="res://Scripts/Resources/base_enclosure.gd" id="1_mi3pc"]
+
+[resource]
+script = ExtResource("1_mi3pc")
+type = 0
+max_capacity = 10
+background_sprite = ExtResource("1_g8rmc")
