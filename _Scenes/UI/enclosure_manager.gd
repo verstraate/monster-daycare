@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 		swiping = false
 		
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
-	var pos_mod: int = 0 if enclosures.size() == selected_enclosure else 1
+	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
 	add_child(enclosure)
 	enclosure.setup_enclosure(new_enclosure)
@@ -53,6 +53,7 @@ func _handle_swipe() -> void:
 	if _tween != null and _tween.is_running():
 		return
 	
+	# If an enclosure doesn't exist that the player is attempting to bring on screen, return early.
 	if (selected_enclosure - 1 < 0 and swipe_dir > 0) or (selected_enclosure + 1 > enclosures.size() - 1 and swipe_dir < 0):
 		return
 	
@@ -65,7 +66,10 @@ func _handle_swipe() -> void:
 	
 	_tween = create_tween()
 	_tween.set_parallel(true)
-	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	_tween.tween_property(curr_enclosure, "position", curr_enclosure_target, swipe_duration)
+	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = next_enclosure
+
+func _on_add_enclosure_pressed() -> void:
+	_add_enclosure(null if enclosures.size() % 2 == 0 else test_enclosure)
