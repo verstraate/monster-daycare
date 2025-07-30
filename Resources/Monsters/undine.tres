@@ -8,6 +8,7 @@ script = ExtResource("1_c4tho")
 id = "undine"
 display_name = "Undine"
 sprite = ExtResource("2_vugdf")
+price = "100"
 base_produce = "1"
 base_upgrade = "10"
 base_upgrade_multiplier = 10.0

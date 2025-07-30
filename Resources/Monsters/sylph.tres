@@ -8,6 +8,7 @@ script = ExtResource("1_ig1hl")
 id = "sylph"
 display_name = "Sylph"
 sprite = ExtResource("2_sqm5i")
+price = "100"
 base_produce = "1"
 base_upgrade = "10"
 base_upgrade_multiplier = 10.0

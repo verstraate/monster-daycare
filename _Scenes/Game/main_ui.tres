@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dw80nkeq5acxs"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dw80nkeq5acxs"]
+
+[ext_resource type="FontFile" uid="uid://dqvbym68fy33l" path="res://Assets/Fonts/pixel.ttf" id="1_egv26"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epmdt"]
 bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
@@ -15,5 +17,9 @@ border_width_bottom = 15
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [resource]
+Label/colors/font_outline_color = Color(0.701961, 0.34902, 0, 1)
+Label/constants/outline_size = 6
+Label/font_sizes/font_size = 14
+Label/fonts/font = ExtResource("1_egv26")
 Panel/styles/panel = SubResource("StyleBoxFlat_epmdt")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_c1xgh")

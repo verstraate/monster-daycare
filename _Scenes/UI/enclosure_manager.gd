@@ -19,7 +19,7 @@ var curr_swipe_position: Vector2
 func _ready() -> void:
 	_add_enclosure()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
 		var mouse_pos = get_global_mouse_position()
 		swiping = get_rect().has_point(mouse_pos)
