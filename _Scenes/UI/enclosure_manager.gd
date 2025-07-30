@@ -1,6 +1,8 @@
 class_name EnclosureManager
 extends Control
 
+@onready
+var _money_manager: MoneyManager = get_tree().get_first_node_in_group("Money")
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
@@ -17,6 +19,7 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
+	_money_manager.tick.timeout.connect(_generate_currency)
 	_add_enclosure()
 
 func _process(_delta: float) -> void:
@@ -67,6 +70,11 @@ func _handle_swipe() -> void:
 	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = next_enclosure
+	
+func _generate_currency() -> void:
+	for enclosure in enclosures:
+		for monster in enclosure.monsters:
+			_money_manager.adjust_money(monster.monster_data.base_produce)
 
 func _on_add_enclosure_pressed() -> void:
 	_add_enclosure()

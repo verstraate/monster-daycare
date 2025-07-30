@@ -1,6 +1,8 @@
 class_name MoneyManager
 extends Node2D
 
+@onready
+var tick: Timer = $%Tick
 var _money: IdleNumber
 
 @export

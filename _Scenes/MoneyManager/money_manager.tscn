@@ -4,3 +4,8 @@
 
 [node name="MoneyManager" type="Node2D" groups=["Money"]]
 script = ExtResource("1_68g30")
+
+[node name="Tick" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+autostart = true
