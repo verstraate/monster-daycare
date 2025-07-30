@@ -20,9 +20,12 @@ func setup_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	active_enclosure = new_enclosure if new_enclosure != null else DEFAULT_ENCLOSURE
 	_background.texture = active_enclosure.background_sprite
 	_update_capacity()
-	
+
+func at_max_capacity() -> bool:
+	return monsters.size() == active_enclosure.max_capacity
+
 func try_add_monster(new_monster: Monster) -> bool:
-	if monsters.size() == active_enclosure.max_capacity:
+	if at_max_capacity():
 		return false
 	
 	_monster_parent.add_child(new_monster)
