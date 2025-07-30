@@ -65,11 +65,11 @@
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Create monsters
-	- [ ] Monster resources
-	- [ ] Monster instance
-	- [ ] Purchase a monster
-	- [ ] Generate currency
+- [x] Create monsters
+	- [x] Monster resources
+	- [x] Monster instance
+	- [x] Purchase a monster
+	- [x] Generate currency
 - [x] Create monster enclosures
 - [ ] Set up monster type preferences (between monsters in enclosure)
 
