@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgo0iq6if8x2y"]
+
+[ext_resource type="Script" path="res://_Scenes/Monster/monster.gd" id="1_yjh7p"]
+
+[node name="Monster" type="TextureRect"]
+anchors_preset = -1
+offset_right = 50.0
+offset_bottom = 50.0
+expand_mode = 2
+script = ExtResource("1_yjh7p")

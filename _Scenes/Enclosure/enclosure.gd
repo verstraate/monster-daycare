@@ -9,7 +9,7 @@ var _monster_parent: Control
 var _setup: bool = false
 
 var active_enclosure: BaseEnclosure
-var current_capacity: int = 0
+var monsters: Array[Monster] = []
 
 func setup_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if not _setup:
@@ -20,12 +20,20 @@ func setup_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	active_enclosure = new_enclosure if new_enclosure != null else DEFAULT_ENCLOSURE
 	_background.texture = active_enclosure.background_sprite
 	_update_capacity()
-	
-func add_monster(new_monster: BaseMonster) -> void:
-	pass
 
-func _update_capacity(new_capacity: int = current_capacity) -> void:
-	if new_capacity != current_capacity:
-		current_capacity = new_capacity
+func at_max_capacity() -> bool:
+	return monsters.size() == active_enclosure.max_capacity
+
+func try_add_monster(new_monster: Monster) -> bool:
+	if at_max_capacity():
+		return false
 	
-	_capacity_label.text = "%d/%d" % [current_capacity, active_enclosure.max_capacity]
+	_monster_parent.add_child(new_monster)
+	new_monster.set_position(Vector2(Utils.rng.randf_range(100, size.x - 100), 4.0 / 7.0 * size.y), true)
+	monsters.append(new_monster)
+	
+	_update_capacity()
+	return true
+
+func _update_capacity() -> void:
+	_capacity_label.text = "%d/%d" % [monsters.size(), active_enclosure.max_capacity]
