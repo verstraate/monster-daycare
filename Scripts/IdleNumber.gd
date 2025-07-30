@@ -1,6 +1,6 @@
 class_name IdleNumber
 
-var _num_places: Array[int]
+var _num_places: Array[int] = [0]
 
 func _init(starting_value: String = "0") -> void:
 	_num_places = num_to_array(starting_value)
@@ -98,8 +98,14 @@ func subtract(value: String) -> void:
 			result.append(diff)
 			appended = true
 	
+	print(result)
+	
 	if result.size() == 0:
 		result = [0]
+	
+	while result.size() > 1:
+		print('pop')
+		result.pop_back()
 		
 	_num_places = result
 	
