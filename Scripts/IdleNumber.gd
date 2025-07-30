@@ -75,6 +75,7 @@ func subtract(value: String) -> void:
 	var _value_size: int = value_places.size()
 	
 	var borrow: int = 0
+	var appended: bool = false
 	while _temp_size > 0 or _value_size > 0:
 		var diff: int = 0
 		
@@ -93,8 +94,13 @@ func subtract(value: String) -> void:
 		else:
 			borrow = 0
 		
-		result.append(diff)
+		if appended or diff > 0:
+			result.append(diff)
+			appended = true
 	
+	if result.size() == 0:
+		result = [0]
+		
 	_num_places = result
 	
 func multiply(value: float) -> void:
@@ -122,3 +128,15 @@ func multiply(value: float) -> void:
 		result.append(curr_place)
 	
 	_num_places = result
+
+func compare(money_to_check: IdleNumber) -> bool:
+	if money_to_check._num_places.size() > _num_places.size():
+		return false
+	
+	for i in range(money_to_check._num_places.size() - 1, -1, -1):
+		if money_to_check._num_places[i] > _num_places[i]:
+			return false
+		elif _num_places[i] > money_to_check._num_places[i]:
+			return true
+	
+	return true

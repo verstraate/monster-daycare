@@ -1,23 +1,29 @@
 class_name ShopItem
-extends Panel
+extends Button
+
+var _money_manager: MoneyManager
 
 var _icon: TextureRect
 var _display_name: Label
-var _price: Label
+var _price_label: Label
 var _is_setup: bool = false
 
 var monster: BaseMonster
+var price: IdleNumber
 
 func setup_item(new_monster: BaseMonster) -> void:
 	if !_is_setup:
+		_money_manager = get_tree().get_first_node_in_group("Money") as MoneyManager
+		
 		_icon = $Icon
 		_display_name = $DisplayName
-		_price = $Price
+		_price_label = $Price
 		
 		_is_setup = true
 
 	monster = new_monster
 
+	price = IdleNumber.new(monster.price)
 	_icon.texture = monster.sprite
 	
 	var scale_width: int = get_parent().size.x - _icon.size.x
@@ -25,7 +31,8 @@ func setup_item(new_monster: BaseMonster) -> void:
 	_display_name.add_theme_font_size_override("font_size", floori(scale_width / 7))
 	_display_name.text = monster.display_name
 	
-	var place_groups: int = ceili(float(monster.price.length()) / 3) - 2
-	var price_suffix: String = Utils.NUMBER_SUFFIXES.find_key(place_groups) if place_groups >= 0 else ""
-	_price.add_theme_font_size_override("font_size", floori(scale_width / 8.5))
-	_price.text = "$%s%s" % [monster.price, price_suffix]
+	_price_label.add_theme_font_size_override("font_size", floori(scale_width / 8.5))
+	_price_label.text = price.display_value(2)
+
+func _on_pressed() -> void:
+	_money_manager.try_purchase(monster.price)

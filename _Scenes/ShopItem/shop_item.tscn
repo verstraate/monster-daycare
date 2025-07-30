@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://_Scenes/ShopItem/shop_item.gd" id="1_g7o87"]
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="2_rs1si"]
 
-[node name="ShopItem" type="Panel"]
+[node name="ShopItem" type="Button"]
 custom_minimum_size = Vector2(200, 100)
+offset_right = 200.0
+offset_bottom = 100.0
 theme = ExtResource("2_rs1si")
 script = ExtResource("1_g7o87")
 
@@ -54,3 +56,5 @@ theme_override_constants/outline_size = 0
 theme_override_constants/shadow_outline_size = 1
 text = "$10M"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
