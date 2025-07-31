@@ -1,5 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://hmsibnj5eiwc"]
 
+[ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="2_7g7ab"]
 [ext_resource type="FontFile" uid="uid://dqvbym68fy33l" path="res://Assets/Fonts/pixel.ttf" id="2_qe02u"]
 [ext_resource type="Script" path="res://_Scenes/MainMenu/button.gd" id="2_wp2eo"]
 
@@ -12,15 +13,6 @@ Button/styles/focus = SubResource("StyleBoxFlat_ll8yg")
 Button/styles/hover = SubResource("StyleBoxFlat_ll8yg")
 Button/styles/normal = SubResource("StyleBoxFlat_ll8yg")
 Button/styles/pressed = SubResource("StyleBoxFlat_ll8yg")
-
-[sub_resource type="Theme" id="Theme_1by66"]
-RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
-RichTextLabel/constants/outline_size = 10
-RichTextLabel/constants/shadow_offset_x = 0
-RichTextLabel/constants/shadow_offset_y = 5
-RichTextLabel/constants/shadow_outline_size = 10
-RichTextLabel/font_sizes/normal_font_size = 100
-RichTextLabel/fonts/normal_font = ExtResource("2_qe02u")
 
 [sub_resource type="Theme" id="Theme_i2hhl"]
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.0823529)
@@ -56,7 +48,7 @@ mouse_filter = 2
 texture_filter = 1
 layout_mode = 2
 mouse_filter = 2
-theme = SubResource("Theme_1by66")
+theme = ExtResource("2_7g7ab")
 text = "Monster Daycare"
 fit_content = true
 autowrap_mode = 0
