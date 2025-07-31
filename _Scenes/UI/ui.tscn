@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=14 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
@@ -12,8 +12,10 @@
 [ext_resource type="Resource" uid="uid://bq63fe1u7chxe" path="res://Resources/Monsters/salamander.tres" id="9_cw5ys"]
 [ext_resource type="Resource" uid="uid://bqp3ucknwv2rc" path="res://Resources/Monsters/sylph.tres" id="10_a6oe6"]
 [ext_resource type="Resource" uid="uid://4gclqar1tqq5" path="res://Resources/Monsters/undine.tres" id="11_p0elb"]
+[ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="13_1g7en"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
+process_mode = 3
 script = ExtResource("1_ofums")
 
 [node name="EnclosureManager" type="Control" parent="." groups=["Enclosures"]]
@@ -109,5 +111,34 @@ text = "10.3Tvg"
 scroll_active = false
 autowrap_mode = 0
 drag_and_drop_selection_enabled = false
+
+[node name="Loading" type="Panel" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+z_index = 999
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_1g7en")
+
+[node name="CenterContainer" type="CenterContainer" parent="Loading"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingLabel" type="RichTextLabel" parent="Loading/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("13_1g7en")
+text = "Loading"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [connection signal="pressed" from="AddEnclosure" to="EnclosureManager" method="_on_add_enclosure_pressed"]
