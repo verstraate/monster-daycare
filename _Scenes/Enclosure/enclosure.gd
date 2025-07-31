@@ -11,13 +11,19 @@ var _setup: bool = false
 var active_enclosure: BaseEnclosure
 var monsters: Array[Monster] = []
 
-func setup_enclosure(new_enclosure: BaseEnclosure = null) -> void:
+func setup_enclosure(new_enclosure: BaseEnclosure = null, from_save: bool = false) -> void:
 	if not _setup:
 		_background = $%Background
 		_capacity_label = $%Capacity
 		_monster_parent = $%Monsters
 	
-	active_enclosure = new_enclosure if new_enclosure != null else DEFAULT_ENCLOSURE
+	if active_enclosure == null:
+		active_enclosure = new_enclosure if new_enclosure != null else DEFAULT_ENCLOSURE
+	
+	if from_save:
+		for monster in monsters:
+			monster.setup_monster()
+	
 	_background.texture = active_enclosure.background_sprite
 	_update_capacity()
 
@@ -39,11 +45,20 @@ func _update_capacity() -> void:
 	_capacity_label.text = "%d/%d" % [monsters.size(), active_enclosure.max_capacity]
 
 func save() -> Dictionary:
+	var monsters_to_save: Array[Dictionary] = []
+	
+	for monster in monsters:
+		monsters_to_save.append({
+			"monster_data": monster.monster_data.resource_path,
+			"pos_x": monster.position.x,
+			"pos_y": monster.position.y,
+		})
+	
 	return {
 		"filename": scene_file_path,
 		"parent": get_parent().get_path(),
 		"pos_x": position.x,
 		"pos_y": position.y,
 		"active_enclosure": active_enclosure,
-		"monsters": monsters,
+		"monsters": monsters_to_save,
 	}
