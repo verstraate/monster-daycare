@@ -34,6 +34,15 @@ static func num_to_array(large_num: String) -> Array[int]:
 	
 	return arr
 
+func array_to_num(places: Array[int] = _num_places) -> String:
+	var result: String = ""
+	
+	var last_index: int = places.size() - 1
+	for i in range(last_index, -1, -1):
+		result += str(places[i]).pad_zeros(3 if i < last_index else 2)
+		
+	return result
+
 func add(value: String) -> void:
 	var result: Array[int] = []
 	
@@ -102,10 +111,6 @@ func subtract(value: String) -> void:
 	
 	if result.size() == 0:
 		result = [0]
-	
-	while result.size() > 1:
-		print('pop')
-		result.pop_back()
 		
 	_num_places = result
 	
@@ -136,10 +141,16 @@ func multiply(value: float) -> void:
 	_num_places = result
 
 func compare(money_to_check: IdleNumber) -> bool:
-	if money_to_check._num_places.size() > _num_places.size():
+	var money_check_size: int = money_to_check._num_places.size()
+	var curr_money_size: int = _num_places.size()
+	
+	if money_check_size > curr_money_size:
 		return false
 	
-	for i in range(money_to_check._num_places.size() - 1, -1, -1):
+	if curr_money_size > money_check_size:
+		return true
+	
+	for i in range(money_check_size - 1, -1, -1):
 		if money_to_check._num_places[i] > _num_places[i]:
 			return false
 		elif _num_places[i] > money_to_check._num_places[i]:
