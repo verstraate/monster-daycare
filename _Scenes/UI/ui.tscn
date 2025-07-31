@@ -18,7 +18,7 @@
 process_mode = 3
 script = ExtResource("1_ofums")
 
-[node name="EnclosureManager" type="Control" parent="." groups=["Enclosures"]]
+[node name="EnclosureManager" type="Control" parent="." groups=["Enclosures", "Persist"]]
 layout_mode = 3
 anchor_right = 0.71
 anchor_bottom = 1.0
