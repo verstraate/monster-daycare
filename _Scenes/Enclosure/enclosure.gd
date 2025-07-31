@@ -59,6 +59,6 @@ func save() -> Dictionary:
 		"parent": get_parent().get_path(),
 		"pos_x": position.x,
 		"pos_y": position.y,
-		"active_enclosure": active_enclosure,
+		"active_enclosure": active_enclosure.resource_path,
 		"monsters": monsters_to_save,
 	}

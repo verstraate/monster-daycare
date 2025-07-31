@@ -76,6 +76,10 @@ func load_game() -> void:
 				_setup_monsters(node_data[i], new_object)
 				continue
 			
+			if i == "active_enclosure":
+				new_object.set(i, load(node_data[i]))
+				continue
+			
 			new_object.set(i, node_data[i])
 		
 		line_count += 1
