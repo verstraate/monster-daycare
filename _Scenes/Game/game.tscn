@@ -8,12 +8,13 @@
 script = ExtResource("1_tkjlu")
 
 [node name="MoneyManager" parent="." instance=ExtResource("2_c7f46")]
+process_mode = 3
 starting_money = "100"
 
 [node name="UI" parent="." instance=ExtResource("1_65hya")]
 
 [node name="SaveGame" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 
