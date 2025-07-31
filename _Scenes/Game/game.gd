@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready
+var _save_game_timer: Timer = $SaveGame
 var _ui_manager: UIManager
 
 func _ready() -> void:
@@ -13,4 +15,9 @@ func _ready() -> void:
 			_ui_manager = node
 	
 	_ui_manager.toggle_loading()
-	
+
+func _on_save_game_timeout() -> void:
+	print('saving...')
+	SaveGame.save_game()
+	print('...saved!')
+	_save_game_timer.start()
