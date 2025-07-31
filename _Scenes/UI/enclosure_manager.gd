@@ -20,7 +20,6 @@ var curr_swipe_position: Vector2
 
 func _ready() -> void:
 	_money_manager.tick.timeout.connect(_generate_currency)
-	_add_enclosure()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -75,6 +74,12 @@ func _generate_currency() -> void:
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
 			_money_manager.adjust_money(monster.monster_data.base_produce)
+
+func save() -> Dictionary:
+	return {
+		"path": get_path(),
+		"selected_enclosure": selected_enclosure
+	}
 
 func _on_add_enclosure_pressed() -> void:
 	_add_enclosure()

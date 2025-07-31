@@ -37,3 +37,13 @@ func try_add_monster(new_monster: Monster) -> bool:
 
 func _update_capacity() -> void:
 	_capacity_label.text = "%d/%d" % [monsters.size(), active_enclosure.max_capacity]
+
+func save() -> Dictionary:
+	return {
+		"filename": scene_file_path,
+		"parent": get_parent().get_path(),
+		"pos_x": position.x,
+		"pos_y": position.y,
+		"active_enclosure": active_enclosure,
+		"monsters": monsters,
+	}
