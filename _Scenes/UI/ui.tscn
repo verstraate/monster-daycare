@@ -114,7 +114,6 @@ drag_and_drop_selection_enabled = false
 
 [node name="Loading" type="Panel" parent="."]
 unique_name_in_owner = true
-process_mode = 3
 z_index = 999
 texture_filter = 1
 anchors_preset = 15
