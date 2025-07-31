@@ -11,7 +11,8 @@ var starting_money: String
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
-	_money = IdleNumber.new(starting_money)
+	if _money == null:
+		_money = IdleNumber.new(starting_money)
 
 func get_money() -> IdleNumber:
 	return _money
@@ -40,7 +41,8 @@ func try_purchase(price: String) -> bool:
 	
 func save() -> Dictionary:
 	return {
-		"_money": _money.array_to_num()
+		"_money": _money.array_to_num(),
+		"_save_time": Time.get_datetime_string_from_system()
 	}
 
 func load_save(data: Dictionary) -> void:
