@@ -19,6 +19,7 @@ config/icon="res://Assets/Sprites/money.png"
 [autoload]
 
 Utils="*res://Scripts/Utils.gd"
+SaveGame="*res://Scripts/SaveGame.gd"
 
 [debug]
 
