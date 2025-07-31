@@ -38,6 +38,9 @@ func setup_item(new_monster: BaseMonster) -> void:
 	_price_label.text = price.display_value(2)
 
 func _on_pressed() -> void:
+	if _enclosure_manager.enclosures.size() == 0:
+		return
+	
 	var active_enclosure: Enclosure = _enclosure_manager.enclosures[_enclosure_manager.selected_enclosure]
 	if active_enclosure.at_max_capacity():
 		return

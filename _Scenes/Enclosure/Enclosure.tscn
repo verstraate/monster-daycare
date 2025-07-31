@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://_Scenes/Enclosure/enclosure.gd" id="1_k38wq"]
 [ext_resource type="Theme" uid="uid://dohb18b6b0d0d" path="res://_Scenes/Enclosure/enclosure.tres" id="2_sjpky"]
 
-[node name="Enclosure" type="Control"]
+[node name="Enclosure" type="Control" groups=["Persist"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://_Scenes/MoneyManager/money_manager.gd" id="1_68g30"]
 
-[node name="MoneyManager" type="Node2D" groups=["Money"]]
+[node name="MoneyManager" type="Node2D" groups=["Money", "Persist"]]
 script = ExtResource("1_68g30")
 
 [node name="Tick" type="Timer" parent="."]

@@ -20,7 +20,6 @@ var curr_swipe_position: Vector2
 
 func _ready() -> void:
 	_money_manager.tick.timeout.connect(_generate_currency)
-	_add_enclosure()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -40,7 +39,11 @@ func _process(_delta: float) -> void:
 				
 	if Input.is_action_just_released("press") and swiping:
 		swiping = false
-		
+
+func setup_enclosures_from_save() -> void:
+	for enclosure in enclosures:
+		enclosure.setup_enclosure(null, true)
+
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
@@ -48,7 +51,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	enclosure.setup_enclosure(new_enclosure)
 	enclosure.position = Vector2(pos_mod * enclosure.size.x, enclosure.position.y)
 	enclosures.append(enclosure)
-		
+
 func _handle_swipe() -> void:
 	if _tween != null and _tween.is_running():
 		return
@@ -70,11 +73,17 @@ func _handle_swipe() -> void:
 	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = next_enclosure
-	
+
 func _generate_currency() -> void:
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
 			_money_manager.adjust_money(monster.monster_data.base_produce)
+
+func save() -> Dictionary:
+	return {
+		"path": get_path(),
+		"selected_enclosure": selected_enclosure
+	}
 
 func _on_add_enclosure_pressed() -> void:
 	_add_enclosure()

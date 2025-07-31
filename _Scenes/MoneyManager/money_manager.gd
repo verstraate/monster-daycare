@@ -37,3 +37,13 @@ func try_purchase(price: String) -> bool:
 	adjust_money("-%s" % price)
 	
 	return true
+	
+func save() -> Dictionary:
+	return {
+		"path": get_path(),
+		"_money": _money.array_to_num(),
+		"_save_time": Time.get_datetime_dict_from_system()
+	}
+
+func load_save(data: Dictionary) -> void:
+	_money = IdleNumber.new(data["_money"])
