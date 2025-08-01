@@ -40,4 +40,4 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 	_loading.visible = value
 
 func update_money_label(value: IdleNumber) -> void:
-	_money.text = value.display_value(2)
+	_money.text = "$%s" % value.display_value(2)
