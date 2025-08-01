@@ -35,10 +35,10 @@ z_index = 10
 anchors_preset = -1
 anchor_left = 0.71
 anchor_right = 0.71
-offset_left = -109.92
+offset_left = -129.92
 offset_top = 30.0
 offset_right = -29.92
-offset_bottom = 110.0
+offset_bottom = 130.0
 theme = ExtResource("2_gu6w1")
 
 [node name="PlusIcon" type="TextureRect" parent="AddEnclosure"]
@@ -47,9 +47,28 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_g2t2n")
+
+[node name="Label" type="Label" parent="AddEnclosure"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_dxera")
+theme_override_font_sizes/font_size = 18
+text = "enclosure"
+horizontal_alignment = 1
 
 [node name="MonsterShop" type="Panel" parent="."]
 z_index = 1
