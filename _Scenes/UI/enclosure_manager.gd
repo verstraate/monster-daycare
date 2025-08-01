@@ -45,12 +45,29 @@ func setup_enclosures_from_save() -> void:
 		enclosure.setup_enclosure(null, true)
 
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
+	if _tween != null and _tween.is_running():
+		return
+	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
 	add_child(enclosure)
 	enclosure.setup_enclosure(new_enclosure)
 	enclosure.position = Vector2(pos_mod * enclosure.size.x, enclosure.position.y)
 	enclosures.append(enclosure)
+	
+	# If new enclosure is the first, skip swipe animation
+	if enclosures.size() < 2:
+		enclosure.position = Vector2.ZERO
+	
+	var curr_enclosure: Enclosure = enclosures[selected_enclosure]
+	var curr_enclosure_target: Vector2 = Vector2(curr_enclosure.size.x * -1, curr_enclosure.position.y)
+	
+	_tween = create_tween()
+	_tween.set_parallel(true)
+	_tween.tween_property(curr_enclosure, "position", curr_enclosure_target, swipe_duration)
+	_tween.tween_property(enclosure, "position", Vector2.ZERO, swipe_duration)
+	
+	selected_enclosure = enclosures.size() - 1
 
 func _handle_swipe() -> void:
 	if _tween != null and _tween.is_running():

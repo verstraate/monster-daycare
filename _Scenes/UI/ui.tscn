@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://_Scenes/UI/monster_shop.gd" id="6_uvm37"]
 [ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="7_1j37f"]
 [ext_resource type="Texture2D" uid="uid://b1ejn0q8u4s2i" path="res://Assets/Sprites/plus.png" id="7_g2t2n"]
-[ext_resource type="Resource" uid="uid://cwjm80eb4sc3s" path="res://Resources/Monsters/gnome.tres" id="8_66jej"]
+[ext_resource type="Resource" uid="uid://cwjm80eb4sc3s" path="res://Resources/Monsters/gaia.tres" id="8_66jej"]
 [ext_resource type="Resource" uid="uid://bq63fe1u7chxe" path="res://Resources/Monsters/salamander.tres" id="9_cw5ys"]
 [ext_resource type="Resource" uid="uid://bqp3ucknwv2rc" path="res://Resources/Monsters/sylph.tres" id="10_a6oe6"]
 [ext_resource type="Resource" uid="uid://4gclqar1tqq5" path="res://Resources/Monsters/undine.tres" id="11_p0elb"]
@@ -20,6 +20,7 @@ script = ExtResource("1_ofums")
 
 [node name="EnclosureManager" type="Control" parent="." groups=["Enclosures", "Persist"]]
 layout_mode = 3
+anchor_top = 0.154321
 anchor_right = 0.71
 anchor_bottom = 1.0
 offset_right = 0.0799561
@@ -29,27 +30,96 @@ theme = ExtResource("1_dxera")
 script = ExtResource("3_u7l7d")
 swipe_threshold = 200
 swipe_duration = 0.3
+metadata/_edit_use_anchors_ = true
 
-[node name="AddEnclosure" type="Button" parent="."]
-z_index = 10
+[node name="InfoBar" type="Panel" parent="."]
 anchors_preset = -1
-anchor_left = 0.71
 anchor_right = 0.71
-offset_left = -109.92
-offset_top = 30.0
-offset_right = -29.92
-offset_bottom = 110.0
+anchor_bottom = 0.154
+offset_right = 0.0799561
+offset_bottom = 0.207993
+grow_horizontal = 2
 theme = ExtResource("2_gu6w1")
 
-[node name="PlusIcon" type="TextureRect" parent="AddEnclosure"]
+[node name="Money" type="Panel" parent="InfoBar"]
+z_index = 1
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 100.0
+theme = ExtResource("2_gu6w1")
+
+[node name="MoneyIcon" type="TextureRect" parent="InfoBar/Money"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.14
+anchor_right = 0.351
+anchor_bottom = 0.84
+offset_left = -0.00400066
+offset_right = 0.0579987
+grow_vertical = 2
+texture = ExtResource("4_eusta")
+expand_mode = 3
+
+[node name="MoneyLabel" type="RichTextLabel" parent="InfoBar/Money"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.985
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.37
+offset_top = 26.0
+offset_right = -9.0
+offset_bottom = -28.0
+theme = ExtResource("2_gu6w1")
+text = "10.3Tvg"
+scroll_active = false
+autowrap_mode = 0
+drag_and_drop_selection_enabled = false
+
+[node name="AddEnclosure" type="Button" parent="InfoBar"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.840663
+anchor_right = 1.00034
+anchor_bottom = 1.0
+offset_left = 0.337952
+offset_right = -0.276062
+theme = ExtResource("2_gu6w1")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlusIcon" type="TextureRect" parent="InfoBar/AddEnclosure"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 23.0
+offset_right = -23.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("7_g2t2n")
+
+[node name="Label" type="Label" parent="InfoBar/AddEnclosure"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_dxera")
+theme_override_font_sizes/font_size = 24
+text = "enclosure"
+horizontal_alignment = 1
 
 [node name="MonsterShop" type="Panel" parent="."]
 z_index = 1
@@ -73,47 +143,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Money" type="Panel" parent="."]
-z_index = 1
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 257.0
-offset_bottom = 115.0
-theme = ExtResource("2_gu6w1")
-
-[node name="MoneyIcon" type="TextureRect" parent="Money"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.062
-anchor_top = 0.14
-anchor_right = 0.351
-anchor_bottom = 0.84
-offset_left = -0.00400066
-offset_right = 0.0579987
-grow_vertical = 2
-texture = ExtResource("4_eusta")
-expand_mode = 3
-
-[node name="MoneyLabel" type="RichTextLabel" parent="Money"]
-unique_name_in_owner = true
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.985
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -144.37
-offset_top = 26.0
-offset_right = -9.0
-offset_bottom = -28.0
-theme = ExtResource("2_gu6w1")
-text = "10.3Tvg"
-scroll_active = false
-autowrap_mode = 0
-drag_and_drop_selection_enabled = false
-
 [node name="Loading" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = 999
 texture_filter = 1
 anchors_preset = 15
@@ -140,4 +172,4 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[connection signal="pressed" from="AddEnclosure" to="EnclosureManager" method="_on_add_enclosure_pressed"]
+[connection signal="pressed" from="InfoBar/AddEnclosure" to="EnclosureManager" method="_on_add_enclosure_pressed"]

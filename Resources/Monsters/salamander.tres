@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://bq63fe1u7chxe"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_e2uwp"]
-[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="2_3oopk"]
+[ext_resource type="Texture2D" uid="uid://bpuvga43b411e" path="res://Assets/Sprites/Monsters/salamander.png" id="2_2xqd0"]
 
 [resource]
 script = ExtResource("1_e2uwp")
 id = "salamander"
 display_name = "Salamander"
-sprite = ExtResource("2_3oopk")
+sprite = ExtResource("2_2xqd0")
 price = "100"
 base_produce = "1"
 base_upgrade = "10"
