@@ -13,6 +13,8 @@ var _enclosure_manager: EnclosureManager
 func _ready() -> void:
 	get_tree().paused = true
 	
+	_ui_manager.toggle_loading(true)
+	
 	# Fake loading timer so changing scenes feels smoother
 	var timer_complete: bool = false
 	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
@@ -28,7 +30,7 @@ func _ready() -> void:
 	_enclosure_manager = get_tree().get_first_node_in_group("Enclosures")
 	_enclosure_manager.setup_enclosures_from_save()
 	
-	_ui_manager.toggle_loading()
+	_ui_manager.toggle_loading(false)
 	
 	get_tree().paused = false
 
