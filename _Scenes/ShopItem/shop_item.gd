@@ -35,7 +35,7 @@ func setup_item(new_monster: BaseMonster) -> void:
 	_display_name.text = monster.display_name
 	
 	_price_label.add_theme_font_size_override("font_size", floori(scale_width / 8.5))
-	_price_label.text = price.display_value(2)
+	_price_label.text = "$%s" % price.display_value(2)
 
 func _on_pressed() -> void:
 	if _enclosure_manager.enclosures.size() == 0:
