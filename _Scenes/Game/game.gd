@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	_ui_manager.toggle_loading(false)
 	
+	_save_game_timer.start()
 	get_tree().paused = false
 
 func _on_save_game_timeout() -> void:

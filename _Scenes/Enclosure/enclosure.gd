@@ -35,7 +35,9 @@ func try_add_monster(new_monster: Monster) -> bool:
 		return false
 	
 	_monster_parent.add_child(new_monster)
-	new_monster.set_position(Vector2(Utils.rng.randf_range(100, size.x - 100), 4.0 / 7.0 * size.y), true)
+	var pos_y: float =  4.0 / 7.0 * size.y + 100
+	new_monster.set_position(Vector2(Utils.rng.randf_range(100, size.x - 100), Utils.rng.randf_range(pos_y - 150, pos_y)), true)
+	new_monster.scale = Vector2.ONE * (new_monster.position.y / pos_y)
 	monsters.append(new_monster)
 	
 	_update_capacity()
@@ -52,6 +54,7 @@ func save() -> Dictionary:
 			"monster_data": monster.monster_data.resource_path,
 			"pos_x": monster.position.x,
 			"pos_y": monster.position.y,
+			"scale": monster.scale.x,
 		})
 	
 	return {
