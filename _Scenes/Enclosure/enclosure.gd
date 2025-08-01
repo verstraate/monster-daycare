@@ -36,7 +36,7 @@ func try_add_monster(new_monster: Monster) -> bool:
 	
 	_monster_parent.add_child(new_monster)
 	var pos_y: float =  4.0 / 7.0 * size.y + 100
-	new_monster.set_position(Vector2(Utils.rng.randf_range(100, size.x - 100), Utils.rng.randf_range(pos_y - 150, pos_y)), true)
+	new_monster.set_position(Vector2(Utils.rng.randf_range(10, size.x - 10 - new_monster.size.x), Utils.rng.randf_range(pos_y - 100, pos_y)), true)
 	new_monster.scale = Vector2.ONE * (new_monster.position.y / pos_y)
 	monsters.append(new_monster)
 	

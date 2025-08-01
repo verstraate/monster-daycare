@@ -4,7 +4,7 @@
 
 [node name="Monster" type="TextureRect"]
 texture_filter = 1
-offset_right = 50.0
-offset_bottom = 50.0
+offset_right = 100.0
+offset_bottom = 100.0
 expand_mode = 2
 script = ExtResource("1_yjh7p")
