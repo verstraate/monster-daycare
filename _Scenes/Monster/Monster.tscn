@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://_Scenes/Monster/monster.gd" id="1_yjh7p"]
 
 [node name="Monster" type="TextureRect"]
-anchors_preset = -1
+texture_filter = 1
 offset_right = 50.0
 offset_bottom = 50.0
 expand_mode = 2
