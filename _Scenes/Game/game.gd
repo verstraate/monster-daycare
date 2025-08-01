@@ -8,10 +8,21 @@ var _ui_manager: UIManager = $UI
 var _money_manager: MoneyManager = $MoneyManager
 var _enclosure_manager: EnclosureManager
 
+@export var load_time: float = 2
+
 func _ready() -> void:
 	get_tree().paused = true
 	
+	# Fake loading timer so changing scenes feels smoother
+	var timer_complete: bool = false
+	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
+	timer.timeout.connect(func(): timer_complete = true)
+	
 	SaveGame.load_game()
+	
+	# If load_game takes longer than load_time, skip
+	if not timer_complete:
+		await timer.timeout
 	
 	_ui_manager.update_money_label(_money_manager.get_money())
 	_enclosure_manager = get_tree().get_first_node_in_group("Enclosures")
