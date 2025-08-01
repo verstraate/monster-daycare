@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://4gclqar1tqq5"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_c4tho"]
-[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="2_vugdf"]
+[ext_resource type="Texture2D" uid="uid://dni3cio8w2p48" path="res://Assets/Sprites/Monsters/undine.png" id="2_3kbol"]
 
 [resource]
 script = ExtResource("1_c4tho")
 id = "undine"
 display_name = "Undine"
-sprite = ExtResource("2_vugdf")
+sprite = ExtResource("2_3kbol")
 price = "100"
 base_produce = "1"
 base_upgrade = "10"

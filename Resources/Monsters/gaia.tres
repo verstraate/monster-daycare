@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://cwjm80eb4sc3s"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_q5qdd"]
+[ext_resource type="Texture2D" uid="uid://nfnkhghw66gi" path="res://Assets/Sprites/Monsters/gaia.png" id="2_mbkna"]
+
+[resource]
+script = ExtResource("1_q5qdd")
+id = "gaia"
+display_name = "gaia"
+sprite = ExtResource("2_mbkna")
+price = "100"
+base_produce = "1"
+base_upgrade = "10"
+base_upgrade_multiplier = 10.0
+type = 3
