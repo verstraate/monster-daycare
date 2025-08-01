@@ -1,6 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dohb18b6b0d0d"]
-
-[ext_resource type="FontFile" uid="uid://dqvbym68fy33l" path="res://Assets/Fonts/pixel.ttf" id="1_i1y4p"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dohb18b6b0d0d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6bde"]
 bg_color = Color(0.0323753, 0.0478499, 0.106777, 1)
@@ -14,6 +12,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 Label/colors/font_outline_color = Color(0.701961, 0.34902, 0, 1)
 Label/constants/outline_size = 16
 Label/font_sizes/font_size = 40
-Label/fonts/font = ExtResource("1_i1y4p")
+Label/fonts/font = null
 Label/styles/normal = SubResource("StyleBoxFlat_l6bde")
 Panel/styles/panel = SubResource("StyleBoxFlat_oc5ty")
