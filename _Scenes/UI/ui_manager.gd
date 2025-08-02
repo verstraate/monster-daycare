@@ -43,6 +43,3 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 
 func update_money_label(value: IdleNumber) -> void:
 	_money.text = "$%s" % value.display_value(2)
-
-func update_monster_shop(monsters_to_update: Dictionary) -> void:
-	_monster_shop.update_monsters(monsters_to_update)

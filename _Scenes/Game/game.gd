@@ -16,14 +16,12 @@ func _ready() -> void:
 	_ui_manager.toggle_loading(true)
 	
 	# Fake loading timer so changing scenes feels smoother
-	var timer_complete: bool = false
 	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
-	timer.timeout.connect(func(): timer_complete = true)
 	
 	SaveGame.load_game()
 	
 	# If load_game takes longer than load_time, skip
-	if not timer_complete:
+	if timer.time_left != 0:
 		await timer.timeout
 	
 	_ui_manager.update_money_label(_money_manager.get_money())

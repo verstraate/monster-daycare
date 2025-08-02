@@ -17,4 +17,6 @@ starting_money = "100"
 wait_time = 10.0
 one_shot = true
 
+[node name="ProgressionManager" type="Node2D" parent="."]
+
 [connection signal="timeout" from="SaveGame" to="." method="_on_save_game_timeout"]

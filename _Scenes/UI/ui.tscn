@@ -121,7 +121,7 @@ theme_override_font_sizes/font_size = 24
 text = "enclosure"
 horizontal_alignment = 1
 
-[node name="MonsterShop" type="Panel" parent="."]
+[node name="MonsterShop" type="Panel" parent="." groups=["Persist"]]
 unique_name_in_owner = true
 z_index = 1
 texture_filter = 1

@@ -110,7 +110,7 @@ func subtract(value: String) -> void:
 			result.append(diff)
 			appended = true
 	
-	while result.back() == 0:
+	while result.size() > 0 and result.back() == 0:
 		result.pop_back()
 	
 	if result.size() == 0:

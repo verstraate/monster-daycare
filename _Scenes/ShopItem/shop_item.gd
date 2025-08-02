@@ -15,9 +15,6 @@ var price: IdleNumber
 
 func setup_item(new_monster: BaseMonster) -> void:
 	if !_is_setup:
-		_money_manager = get_tree().get_first_node_in_group("Money") as MoneyManager
-		_enclosure_manager = get_tree().get_first_node_in_group("Enclosures") as EnclosureManager
-		
 		_icon = $Icon
 		_display_name = $DisplayName
 		price_label = $Price
@@ -38,6 +35,11 @@ func setup_item(new_monster: BaseMonster) -> void:
 	price_label.text = "$%s" % price.display_value(2)
 
 func _on_pressed() -> void:
+	if _enclosure_manager == null:
+		_enclosure_manager = get_tree().get_first_node_in_group("Enclosures") as EnclosureManager
+	if _money_manager == null:
+		_money_manager = get_tree().get_first_node_in_group("Money") as MoneyManager
+	
 	if _enclosure_manager.enclosures.size() == 0:
 		return
 	
@@ -45,9 +47,12 @@ func _on_pressed() -> void:
 	if active_enclosure.at_max_capacity():
 		return
 	
-	if not _money_manager.try_purchase(monster.price):
+	if not _money_manager.try_purchase(price.array_to_num()):
 		return
 	
 	var new_monster: Monster = MONSTER.instantiate()
 	active_enclosure.try_add_monster(new_monster)
 	new_monster.setup_monster(monster)
+	
+	price.multiply(2)
+	price_label.text = "$%s" % price.display_value(2)

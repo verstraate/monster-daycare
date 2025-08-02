@@ -7,7 +7,8 @@ var keys_to_ignore: Array[String] = [
 	"pos_x", 
 	"pos_y",
 	"scale",
-	"_save_time"
+	"_save_time",
+	"price"
 ]
 
 const MONSTER = preload("res://_Scenes/Monster/monster.tscn")
@@ -53,9 +54,9 @@ func load_game() -> void:
 			var parent = get_node(node_data["parent"])
 			if new_object is Enclosure and parent is EnclosureManager:
 				parent = parent as EnclosureManager
-				parent.add_child(new_object)
 				parent.enclosures.append(new_object)
 			
+			parent.add_child(new_object)
 			new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
 		
 		if node_data.has("path"):
@@ -70,7 +71,7 @@ func load_game() -> void:
 				continue
 			
 			if i == "_money":
-				_setup_money(node_data[i], new_object)
+				_setup_idle_number(new_object, i, node_data)
 				continue
 			
 			if i == "monsters":
@@ -81,13 +82,26 @@ func load_game() -> void:
 				new_object.set(i, load(node_data[i]))
 				continue
 			
+			if i == "monsters_for_sale":
+				new_object = new_object as MonsterShop
+				var monsters_for_sale: Array[BaseMonster] = []
+				for monster in node_data[i]:
+					monsters_for_sale.append(load(node_data[i][monster]["data"]))
+				new_object.clear_monsters()
+				new_object.add_monsters_to_shop(monsters_for_sale)
+				for item in node_data[i]:
+					var curr_item: ShopItem = new_object.monsters_displayed[item]
+					curr_item.price = IdleNumber.new(node_data[i][item]["price"])
+					curr_item.price_label.text = "$%s" % curr_item.price.display_value(2)
+				continue
+			
 			new_object.set(i, node_data[i])
 		
 		line_count += 1
 
-func _setup_money(value: String, new_object: MoneyManager) -> void:
-	var money: IdleNumber = IdleNumber.new(value)
-	new_object._money = money
+func _setup_idle_number(new_object, i: String, node_data: Dictionary) -> void:
+	var num: IdleNumber = IdleNumber.new(node_data[i])
+	new_object.set(i, num)
 
 func _setup_monsters(monsters: Array, new_object: Enclosure) -> void:
 	var monsters_to_add: Array[Monster] = []
