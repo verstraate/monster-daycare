@@ -3,7 +3,10 @@ class_name IdleNumber
 var _num_places: Array[int] = [0]
 
 func _init(starting_value: String = "0") -> void:
-	_num_places = num_to_array(starting_value)
+	set_value(starting_value)
+	
+func set_value(new_value: String) -> void:
+	_num_places = num_to_array(new_value)
 
 func display_value(significant_figures: int = 3, append_suffix: bool = true) -> String:
 	var highest_place: int = _num_places.back()

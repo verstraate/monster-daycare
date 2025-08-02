@@ -7,6 +7,8 @@ var _money: RichTextLabel = $%MoneyLabel
 var _loading: Panel = $%Loading
 @onready
 var _loading_label: RichTextLabel = $%LoadingLabel
+@onready
+var _monster_shop: MonsterShop = $%MonsterShop
 
 var _player_money: MoneyManager
 
@@ -41,3 +43,6 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 
 func update_money_label(value: IdleNumber) -> void:
 	_money.text = "$%s" % value.display_value(2)
+
+func update_monster_shop(monsters_to_update: Dictionary) -> void:
+	_monster_shop.update_monsters(monsters_to_update)

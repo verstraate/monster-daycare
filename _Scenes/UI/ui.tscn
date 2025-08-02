@@ -122,6 +122,7 @@ text = "enclosure"
 horizontal_alignment = 1
 
 [node name="MonsterShop" type="Panel" parent="."]
+unique_name_in_owner = true
 z_index = 1
 texture_filter = 1
 anchors_preset = -1
