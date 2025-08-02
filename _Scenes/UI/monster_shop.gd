@@ -15,14 +15,12 @@ func _ready() -> void:
 	_display_monsters(monsters_for_sale)
 
 func clear_monsters() -> void:
-	print("clear")
 	monsters_for_sale.clear()
 	for monster in monsters_displayed:
 		monsters_displayed[monster].queue_free()
 	monsters_displayed.clear()
 
 func add_monsters_to_shop(new_monsters: Array[BaseMonster]) -> void:
-	print("add")
 	monsters_for_sale.append_array(new_monsters)
 	shop_updated.emit(new_monsters)
 
