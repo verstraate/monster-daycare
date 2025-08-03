@@ -112,7 +112,8 @@ func _generate_currency() -> void:
 func save() -> Dictionary:
 	return {
 		"path": get_path(),
-		"selected_enclosure": selected_enclosure
+		"selected_enclosure": selected_enclosure,
+		"enclosure_cost": enclosure_cost.array_to_num()
 	}
 
 func _on_add_enclosure_pressed() -> void:

@@ -22,13 +22,14 @@ var _time_since_step: float = 0
 var _loading_step: int = 0
 
 func _ready() -> void:
-	_player_money = get_tree().get_first_node_in_group("Money")
+	if _player_money == null:
+		_player_money = get_tree().get_first_node_in_group("Money")
 	_player_money.money_updated.connect(update_money_label)
 	update_money_label(_player_money._money)
 	
 	_enclosure_manager.cost_updated.connect(update_enclosure_cost_label)
 	update_enclosure_cost_label(_enclosure_manager.enclosure_cost)
-	
+
 func _process(delta: float) -> void:
 	if _loading_cycle_active:
 		_time_since_step += delta
@@ -44,7 +45,7 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 	if not value:
 		_loading_label.text = "Done!"
 		await get_tree().create_timer(1.5).timeout
-		
+	
 	_loading.visible = value
 
 func update_money_label(value: IdleNumber) -> void:

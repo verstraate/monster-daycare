@@ -24,10 +24,11 @@ func _ready() -> void:
 	if timer.time_left != 0:
 		await timer.timeout
 	
-	_ui_manager.update_money_label(_money_manager.get_money())
 	_enclosure_manager = get_tree().get_first_node_in_group("Enclosures")
 	_enclosure_manager.setup_enclosures_from_save()
 	
+	_ui_manager.update_money_label(_money_manager.get_money())
+	_ui_manager.update_enclosure_cost_label(_enclosure_manager.enclosure_cost)
 	_ui_manager.toggle_loading(false)
 	
 	_save_game_timer.start()

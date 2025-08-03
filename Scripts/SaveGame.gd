@@ -70,7 +70,7 @@ func load_game() -> void:
 			if keys_to_ignore.has(i):
 				continue
 			
-			if i == "_money":
+			if i == "_money" or i == "enclosure_cost":
 				_setup_idle_number(new_object, i, node_data)
 				continue
 			
