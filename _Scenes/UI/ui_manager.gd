@@ -2,7 +2,11 @@ class_name UIManager
 extends CanvasLayer
 
 @onready
+var _enclosure_manager: EnclosureManager = $EnclosureManager
+@onready
 var _money: RichTextLabel = $%MoneyLabel
+@onready
+var _enclosure_cost: Label = $%EnclosureCost
 @onready
 var _loading: Panel = $%Loading
 @onready
@@ -20,8 +24,10 @@ var _loading_step: int = 0
 func _ready() -> void:
 	_player_money = get_tree().get_first_node_in_group("Money")
 	_player_money.money_updated.connect(update_money_label)
-	
 	update_money_label(_player_money._money)
+	
+	_enclosure_manager.cost_updated.connect(update_enclosure_cost_label)
+	update_enclosure_cost_label(_enclosure_manager.enclosure_cost)
 	
 func _process(delta: float) -> void:
 	if _loading_cycle_active:
@@ -43,3 +49,6 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 
 func update_money_label(value: IdleNumber) -> void:
 	_money.text = "$%s" % value.display_value(2)
+
+func update_enclosure_cost_label(value: IdleNumber) -> void:
+	_enclosure_cost.text = "$%s" % value.display_value(2)

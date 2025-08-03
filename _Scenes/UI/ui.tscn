@@ -97,27 +97,49 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_right = -23.0
-offset_bottom = -16.0
+offset_left = 27.0
+offset_top = 12.0
+offset_right = -28.0018
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7_g2t2n")
 
-[node name="Label" type="Label" parent="InfoBar/AddEnclosure"]
+[node name="EnclosureCost" type="Label" parent="InfoBar/AddEnclosure"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -33.0
-offset_bottom = -3.0
+offset_left = -0.000244141
+offset_top = -30.0
+offset_right = -0.000244141
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_dxera")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.384314)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 9
+theme_override_font_sizes/font_size = 20
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="InfoBar/AddEnclosure"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -0.00177002
+offset_bottom = 25.0
+grow_horizontal = 2
+theme = ExtResource("1_dxera")
+theme_override_font_sizes/font_size = 20
 text = "enclosure"
 horizontal_alignment = 1
 

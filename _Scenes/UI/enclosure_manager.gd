@@ -6,9 +6,11 @@ var _money_manager: MoneyManager = get_tree().get_first_node_in_group("Money")
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
+var enclosure_cost: IdleNumber = IdleNumber.new("0")
+signal cost_updated(new_cost: IdleNumber)
+
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
-var enclosure_cost: IdleNumber = IdleNumber.new("0")
 @export_range(1, 100) var enclosure_cost_rate: float = 10
 
 @export_group("Swipe Settings")
@@ -57,6 +59,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 		enclosure_cost.multiply(enclosure_cost_rate)
 	else:
 		enclosure_cost.set_value("10000")
+	cost_updated.emit(enclosure_cost)
 	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
