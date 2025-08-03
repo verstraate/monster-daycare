@@ -8,6 +8,8 @@ var _tween: Tween
 
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
+var enclosure_cost: IdleNumber = IdleNumber.new("10000")
+@export_range(1, 100) var enclosure_cost_rate: float = 10
 
 @export_group("Swipe Settings")
 @export_range(100, 500) var swipe_threshold: int
@@ -47,6 +49,13 @@ func setup_enclosures_from_save() -> void:
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
 		return
+	
+	if enclosures.size() > 0:
+		print("$%s - $%s" % [_money_manager.get_money().array_to_num(), enclosure_cost.array_to_num()])
+		if not _money_manager.try_purchase(enclosure_cost.array_to_num()):
+			return
+		
+		enclosure_cost.multiply(enclosure_cost_rate)
 	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
