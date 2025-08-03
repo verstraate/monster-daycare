@@ -18,9 +18,10 @@ func get_money() -> IdleNumber:
 
 func adjust_money(value: String) -> void:
 	if value[0] == "-":
-		_money.subtract(value)
+		var sub_amount: String = value.substr(1, len(value))
+		_money.subtract(sub_amount)
 	elif value[0] == "*":
-		var mult_amount: String = value.substr(1, value.length())
+		var mult_amount: String = value.substr(1, len(value))
 		_money.multiply(float(mult_amount))
 	else:
 		_money.add(value)
