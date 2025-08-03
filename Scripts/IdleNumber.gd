@@ -42,7 +42,7 @@ func array_to_num(places: Array[int] = _num_places) -> String:
 	
 	var last_index: int = places.size() - 1
 	for i in range(last_index, -1, -1):
-		result += str(places[i]).pad_zeros(3 if i < last_index else 2)
+		result += str(places[i]).pad_zeros(3 if i < last_index else 0)
 		
 	return result
 
@@ -87,7 +87,6 @@ func subtract(value: String) -> void:
 	var _value_size: int = value_places.size()
 	
 	var borrow: int = 0
-	var appended: bool = false
 	while _temp_size > 0 or _value_size > 0:
 		var diff: int = 0
 		
@@ -106,9 +105,7 @@ func subtract(value: String) -> void:
 		else:
 			borrow = 0
 		
-		if appended or diff > 0:
-			result.append(diff)
-			appended = true
+		result.append(diff)
 	
 	while result.size() > 0 and result.back() == 0:
 		result.pop_back()
