@@ -11,8 +11,6 @@ var _enclosure_cost: Label = $%EnclosureCost
 var _loading: Panel = $%Loading
 @onready
 var _loading_label: RichTextLabel = $%LoadingLabel
-@onready
-var _monster_shop: MonsterShop = $%MonsterShop
 
 var _player_money: MoneyManager
 
