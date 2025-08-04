@@ -51,6 +51,9 @@ func _process(_delta: float) -> void:
 		swiping = false
 
 func setup_enclosures_from_save() -> void:
+	if len(enclosures) == 0:
+		return
+	
 	for enclosure in enclosures:
 		enclosure.setup_enclosure(null, true)
 

@@ -17,6 +17,7 @@ process_mode = 3
 starting_money = "100"
 
 [node name="ProgressionManager" type="Node2D" parent="." groups=["Persist"]]
+process_mode = 3
 script = ExtResource("4_cl16e")
 locked_monsters = Array[ExtResource("4_6a16g")]([ExtResource("5_3ebme"), ExtResource("6_eaye3"), ExtResource("7_yi3ji")])
 
