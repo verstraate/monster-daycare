@@ -25,6 +25,9 @@ func get_money() -> IdleNumber:
 	return _money
 
 func adjust_money(value: String) -> void:
+	if len(value) < 1:
+		return
+	
 	if value[0] == "-":
 		var sub_amount: String = value.substr(1, len(value))
 		_money.subtract(sub_amount)
@@ -51,7 +54,8 @@ func save() -> Dictionary:
 	return {
 		"path": get_path(),
 		"_money": _money.array_to_num(),
-		"_save_time": Time.get_datetime_dict_from_system()
+		"_save_time": Time.get_datetime_dict_from_system(),
+		"currency_per_tick": EnclosureManager.Instance.get_currency_per_tick().array_to_num()
 	}
 
 func load_save(data: Dictionary) -> void:

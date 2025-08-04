@@ -22,6 +22,7 @@ func _ready() -> void:
 	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
 	
 	SaveGame.load_game()
+	SaveGame.save_game() # Override current save for with idle earnings and updated values
 	
 	# If load_game takes longer than load_time, skip
 	if timer.time_left != 0:
