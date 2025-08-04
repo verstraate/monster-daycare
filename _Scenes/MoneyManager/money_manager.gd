@@ -1,26 +1,38 @@
 class_name MoneyManager
 extends Node2D
 
+static var Instance: MoneyManager
+
 @onready
 var tick: Timer = $%Tick
-var _money: IdleNumber
 
 @export
 var starting_money: String
+var _money: IdleNumber
 
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
+	if Instance != null and Instance != self:
+		queue_free()
+		return
+	
+	Instance = self
+	
 	_money = IdleNumber.new(starting_money)
 
 func get_money() -> IdleNumber:
 	return _money
 
 func adjust_money(value: String) -> void:
+	if len(value) < 1:
+		return
+	
 	if value[0] == "-":
-		_money.subtract(value)
+		var sub_amount: String = value.substr(1, len(value))
+		_money.subtract(sub_amount)
 	elif value[0] == "*":
-		var mult_amount: String = value.substr(1, value.length())
+		var mult_amount: String = value.substr(1, len(value))
 		_money.multiply(float(mult_amount))
 	else:
 		_money.add(value)
@@ -42,7 +54,8 @@ func save() -> Dictionary:
 	return {
 		"path": get_path(),
 		"_money": _money.array_to_num(),
-		"_save_time": Time.get_datetime_dict_from_system()
+		"_save_time": Time.get_datetime_dict_from_system(),
+		"currency_per_tick": EnclosureManager.Instance.get_currency_per_tick().array_to_num()
 	}
 
 func load_save(data: Dictionary) -> void:

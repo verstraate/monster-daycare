@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://bqp3ucknwv2rc"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_ig1hl"]
+[ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_ig1hl"]
 [ext_resource type="Texture2D" uid="uid://dx71v7gqlb5g" path="res://Assets/Sprites/Monsters/sylph.png" id="2_sh705"]
 
 [resource]
@@ -8,8 +8,8 @@ script = ExtResource("1_ig1hl")
 id = "sylph"
 display_name = "Sylph"
 sprite = ExtResource("2_sh705")
-price = "100"
-base_produce = "1"
-base_upgrade = "10"
+price = "25000"
+base_produce = "50"
+base_upgrade = "50000"
 base_upgrade_multiplier = 10.0
 type = 4

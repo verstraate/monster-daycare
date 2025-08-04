@@ -1,13 +1,17 @@
 class_name EnclosureManager
 extends Control
 
-@onready
-var _money_manager: MoneyManager = get_tree().get_first_node_in_group("Money")
+static var Instance: EnclosureManager
+
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
+var enclosure_cost: IdleNumber = IdleNumber.new("0")
+signal cost_updated(new_cost: IdleNumber)
+
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
+@export_range(1, 100) var enclosure_cost_rate: float = 10
 
 @export_group("Swipe Settings")
 @export_range(100, 500) var swipe_threshold: int
@@ -19,7 +23,13 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
-	_money_manager.tick.timeout.connect(_generate_currency)
+	if Instance != null and Instance != self:
+		queue_free()
+		return
+	
+	Instance = self
+	
+	MoneyManager.Instance.tick.timeout.connect(_generate_currency)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -47,6 +57,15 @@ func setup_enclosures_from_save() -> void:
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
 		return
+	
+	if not MoneyManager.Instance.try_purchase(enclosure_cost.array_to_num()):
+		return
+	
+	if enclosures.size() > 0:
+		enclosure_cost.multiply(enclosure_cost_rate)
+	else:
+		enclosure_cost.set_value("10000")
+	cost_updated.emit(enclosure_cost)
 	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
 	var enclosure: Enclosure = ENCLOSURE_SCENE.instantiate()
@@ -94,12 +113,21 @@ func _handle_swipe() -> void:
 func _generate_currency() -> void:
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
-			_money_manager.adjust_money(monster.monster_data.base_produce)
+			MoneyManager.Instance.adjust_money(monster.monster_data.base_produce)
+
+func get_currency_per_tick() -> IdleNumber:
+	var currency: IdleNumber = IdleNumber.new()
+	for enclosure in enclosures:
+		for monster in enclosure.monsters:
+			currency.add(monster.monster_data.base_produce)
+	
+	return currency
 
 func save() -> Dictionary:
 	return {
 		"path": get_path(),
-		"selected_enclosure": selected_enclosure
+		"selected_enclosure": selected_enclosure,
+		"enclosure_cost": enclosure_cost.array_to_num()
 	}
 
 func _on_add_enclosure_pressed() -> void:

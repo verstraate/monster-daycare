@@ -3,7 +3,10 @@ class_name IdleNumber
 var _num_places: Array[int] = [0]
 
 func _init(starting_value: String = "0") -> void:
-	_num_places = num_to_array(starting_value)
+	set_value(starting_value)
+	
+func set_value(new_value: String) -> void:
+	_num_places = num_to_array(new_value)
 
 func display_value(significant_figures: int = 3, append_suffix: bool = true) -> String:
 	var highest_place: int = _num_places.back()
@@ -39,7 +42,7 @@ func array_to_num(places: Array[int] = _num_places) -> String:
 	
 	var last_index: int = places.size() - 1
 	for i in range(last_index, -1, -1):
-		result += str(places[i]).pad_zeros(3 if i < last_index else 2)
+		result += str(places[i]).pad_zeros(3 if i < last_index else 0)
 		
 	return result
 
@@ -72,6 +75,9 @@ func add(value: String) -> void:
 		
 		result.append(curr_place)
 	
+	while result.size() > 0 and result.back() == 0:
+		result.pop_back()
+	
 	_num_places = result
 
 func subtract(value: String) -> void:
@@ -84,7 +90,6 @@ func subtract(value: String) -> void:
 	var _value_size: int = value_places.size()
 	
 	var borrow: int = 0
-	var appended: bool = false
 	while _temp_size > 0 or _value_size > 0:
 		var diff: int = 0
 		
@@ -103,11 +108,9 @@ func subtract(value: String) -> void:
 		else:
 			borrow = 0
 		
-		if appended or diff > 0:
-			result.append(diff)
-			appended = true
+		result.append(diff)
 	
-	while result.back() == 0:
+	while result.size() > 0 and result.back() == 0:
 		result.pop_back()
 	
 	if result.size() == 0:
@@ -138,6 +141,9 @@ func multiply(value: float) -> void:
 		curr_place %= 1000
 		
 		result.append(curr_place)
+	
+	while result.size() > 0 and result.back() == 0:
+		result.pop_back()
 	
 	_num_places = result
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="2_7g7ab"]
 [ext_resource type="FontFile" uid="uid://dqvbym68fy33l" path="res://Assets/Fonts/pixel.ttf" id="2_qe02u"]
-[ext_resource type="Script" path="res://_Scenes/MainMenu/button.gd" id="2_wp2eo"]
+[ext_resource type="Script" uid="uid://yghgt2yw145u" path="res://_Scenes/MainMenu/button.gd" id="2_wp2eo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll8yg"]
 bg_color = Color(0.734253, 0.880168, 0.89486, 1)

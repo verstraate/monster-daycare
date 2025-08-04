@@ -1,17 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=11 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
-[ext_resource type="Script" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
+[ext_resource type="Script" uid="uid://b4dg8jdvwdc7h" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
 [ext_resource type="Theme" uid="uid://cehswbxg4ymwm" path="res://_Scenes/Game/money_ui.tres" id="2_gu6w1"]
-[ext_resource type="Script" path="res://_Scenes/UI/enclosure_manager.gd" id="3_u7l7d"]
+[ext_resource type="Script" uid="uid://d3lwso2q5b30k" path="res://_Scenes/UI/enclosure_manager.gd" id="3_u7l7d"]
 [ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="4_eusta"]
-[ext_resource type="Script" path="res://_Scenes/UI/monster_shop.gd" id="6_uvm37"]
-[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="7_1j37f"]
+[ext_resource type="Script" uid="uid://mh7fsm4tq1lx" path="res://_Scenes/UI/monster_shop.gd" id="6_uvm37"]
+[ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="7_1j37f"]
 [ext_resource type="Texture2D" uid="uid://b1ejn0q8u4s2i" path="res://Assets/Sprites/plus.png" id="7_g2t2n"]
 [ext_resource type="Resource" uid="uid://cwjm80eb4sc3s" path="res://Resources/Monsters/gaia.tres" id="8_66jej"]
-[ext_resource type="Resource" uid="uid://bq63fe1u7chxe" path="res://Resources/Monsters/salamander.tres" id="9_cw5ys"]
-[ext_resource type="Resource" uid="uid://bqp3ucknwv2rc" path="res://Resources/Monsters/sylph.tres" id="10_a6oe6"]
-[ext_resource type="Resource" uid="uid://4gclqar1tqq5" path="res://Resources/Monsters/undine.tres" id="11_p0elb"]
 [ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="13_1g7en"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
@@ -97,31 +94,54 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_right = -23.0
-offset_bottom = -16.0
+offset_left = 27.0
+offset_top = 12.0
+offset_right = -28.0018
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7_g2t2n")
 
-[node name="Label" type="Label" parent="InfoBar/AddEnclosure"]
+[node name="EnclosureCost" type="Label" parent="InfoBar/AddEnclosure"]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -33.0
-offset_bottom = -3.0
+offset_left = -0.000244141
+offset_top = -30.0
+offset_right = -0.000244141
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_dxera")
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.384314)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 9
+theme_override_font_sizes/font_size = 20
+text = "$0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="InfoBar/AddEnclosure"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -0.00177002
+offset_bottom = 25.0
+grow_horizontal = 2
+theme = ExtResource("1_dxera")
+theme_override_font_sizes/font_size = 20
 text = "enclosure"
 horizontal_alignment = 1
 
-[node name="MonsterShop" type="Panel" parent="."]
+[node name="MonsterShop" type="Panel" parent="." groups=["Persist"]]
+unique_name_in_owner = true
 z_index = 1
 texture_filter = 1
 anchors_preset = -1
@@ -133,7 +153,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_dxera")
 script = ExtResource("6_uvm37")
-monsters_for_sale = Array[ExtResource("7_1j37f")]([ExtResource("8_66jej"), ExtResource("9_cw5ys"), ExtResource("10_a6oe6"), ExtResource("11_p0elb")])
+monsters_for_sale = Array[ExtResource("7_1j37f")]([ExtResource("8_66jej")])
 
 [node name="Monsters" type="VBoxContainer" parent="MonsterShop"]
 layout_mode = 1

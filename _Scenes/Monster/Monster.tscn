@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgo0iq6if8x2y"]
 
-[ext_resource type="Script" path="res://_Scenes/Monster/monster.gd" id="1_yjh7p"]
+[ext_resource type="Script" uid="uid://bgt7k4r0y32f0" path="res://_Scenes/Monster/monster.gd" id="1_yjh7p"]
 
 [node name="Monster" type="TextureRect"]
 texture_filter = 1
