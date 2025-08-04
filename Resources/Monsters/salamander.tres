@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://bq63fe1u7chxe"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_e2uwp"]
+[ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_e2uwp"]
 [ext_resource type="Texture2D" uid="uid://bpuvga43b411e" path="res://Assets/Sprites/Monsters/salamander.png" id="2_2xqd0"]
 
 [resource]

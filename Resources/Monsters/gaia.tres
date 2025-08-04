@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://cwjm80eb4sc3s"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_q5qdd"]
+[ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_q5qdd"]
 [ext_resource type="Texture2D" uid="uid://nfnkhghw66gi" path="res://Assets/Sprites/Monsters/gaia.png" id="2_mbkna"]
 
 [resource]

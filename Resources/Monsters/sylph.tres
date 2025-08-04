@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BaseMonster" load_steps=3 format=3 uid="uid://bqp3ucknwv2rc"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_ig1hl"]
+[ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="1_ig1hl"]
 [ext_resource type="Texture2D" uid="uid://dx71v7gqlb5g" path="res://Assets/Sprites/Monsters/sylph.png" id="2_sh705"]
 
 [resource]

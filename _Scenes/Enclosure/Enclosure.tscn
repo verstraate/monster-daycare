@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpe832yd2m07l"]
 
 [ext_resource type="Texture2D" uid="uid://dvvogl73722t3" path="res://Assets/Sprites/enclosure_plains.png" id="1_huus6"]
-[ext_resource type="Script" path="res://_Scenes/Enclosure/enclosure.gd" id="1_k38wq"]
+[ext_resource type="Script" uid="uid://ds1lbbs7u7ykg" path="res://_Scenes/Enclosure/enclosure.gd" id="1_k38wq"]
 [ext_resource type="Theme" uid="uid://dohb18b6b0d0d" path="res://_Scenes/Enclosure/enclosure.tres" id="2_sjpky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgp4b"]

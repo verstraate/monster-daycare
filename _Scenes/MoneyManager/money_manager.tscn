@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ds0fdr74n7wjs"]
 
-[ext_resource type="Script" path="res://_Scenes/MoneyManager/money_manager.gd" id="1_68g30"]
+[ext_resource type="Script" uid="uid://dagiv4u43toh8" path="res://_Scenes/MoneyManager/money_manager.gd" id="1_68g30"]
 
 [node name="MoneyManager" type="Node2D" groups=["Money", "Persist"]]
 script = ExtResource("1_68g30")

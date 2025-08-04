@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5xjor4rx368d"]
 
-[ext_resource type="Script" path="res://_Scenes/ShopItem/shop_item.gd" id="1_g7o87"]
+[ext_resource type="Script" uid="uid://dh4ehx6e2wle2" path="res://_Scenes/ShopItem/shop_item.gd" id="1_g7o87"]
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="2_rs1si"]
 
 [node name="ShopItem" type="Button"]
