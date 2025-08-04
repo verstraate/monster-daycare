@@ -1,19 +1,22 @@
+class_name GameManager
 extends Node2D
+
+static var Instance: GameManager
 
 @onready
 var _save_game_timer: Timer = $SaveGame
-@onready
-var _ui_manager: UIManager = $UI
-@onready
-var _money_manager: MoneyManager = $MoneyManager
-var _enclosure_manager: EnclosureManager
 
 @export var load_time: float = 2
 
 func _ready() -> void:
-	get_tree().paused = true
+	if Instance != null and Instance != self:
+		queue_free()
+		return
 	
-	_ui_manager.toggle_loading(true)
+	Instance = self
+	
+	get_tree().paused = true
+	UIManager.Instance.toggle_loading(true)
 	
 	# Fake loading timer so changing scenes feels smoother
 	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
@@ -24,13 +27,12 @@ func _ready() -> void:
 	if timer.time_left != 0:
 		await timer.timeout
 	
-	_enclosure_manager = get_tree().get_first_node_in_group("Enclosures")
-	_enclosure_manager.setup_enclosures_from_save()
+	EnclosureManager.Instance.setup_enclosures_from_save()
 	
-	_ui_manager.update_money_label(_money_manager.get_money())
-	_ui_manager.update_enclosure_cost_label(_enclosure_manager.enclosure_cost)
-	_ui_manager.toggle_loading(false)
+	UIManager.Instance.update_enclosure_cost_label(EnclosureManager.Instance.enclosure_cost)
+	UIManager.Instance.update_money_label(MoneyManager.Instance.get_money())
 	
+	UIManager.Instance.toggle_loading(false)
 	_save_game_timer.start()
 	get_tree().paused = false
 

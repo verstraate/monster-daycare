@@ -1,8 +1,8 @@
 class_name EnclosureManager
 extends Control
 
-@onready
-var _money_manager: MoneyManager = get_tree().get_first_node_in_group("Money")
+static var Instance: EnclosureManager
+
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
@@ -23,7 +23,13 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
-	_money_manager.tick.timeout.connect(_generate_currency)
+	if Instance != null and Instance != self:
+		queue_free()
+		return
+	
+	Instance = self
+	
+	MoneyManager.Instance.tick.timeout.connect(_generate_currency)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -52,7 +58,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
 		return
 	
-	if not _money_manager.try_purchase(enclosure_cost.array_to_num()):
+	if not MoneyManager.Instance.try_purchase(enclosure_cost.array_to_num()):
 		return
 	
 	if enclosures.size() > 0:
@@ -107,7 +113,7 @@ func _handle_swipe() -> void:
 func _generate_currency() -> void:
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
-			_money_manager.adjust_money(monster.monster_data.base_produce)
+			MoneyManager.Instance.adjust_money(monster.monster_data.base_produce)
 
 func save() -> Dictionary:
 	return {

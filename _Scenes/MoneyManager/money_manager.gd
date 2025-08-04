@@ -1,16 +1,24 @@
 class_name MoneyManager
 extends Node2D
 
+static var Instance: MoneyManager
+
 @onready
 var tick: Timer = $%Tick
-var _money: IdleNumber
 
 @export
 var starting_money: String
+var _money: IdleNumber
 
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
+	if Instance != null and Instance != self:
+		queue_free()
+		return
+	
+	Instance = self
+	
 	_money = IdleNumber.new(starting_money)
 
 func get_money() -> IdleNumber:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi7aj25brt7l6"]
+[gd_scene load_steps=5 format=3 uid="uid://bi7aj25brt7l6"]
 
 [ext_resource type="PackedScene" uid="uid://33dpkdbpx7lf" path="res://_Scenes/UI/ui.tscn" id="1_65hya"]
 [ext_resource type="Script" uid="uid://btclhvrlpb346" path="res://_Scenes/Game/game.gd" id="1_tkjlu"]
 [ext_resource type="PackedScene" uid="uid://ds0fdr74n7wjs" path="res://_Scenes/MoneyManager/money_manager.tscn" id="2_c7f46"]
+[ext_resource type="Script" uid="uid://uccsi2kteeqn" path="res://_Scenes/Game/progression_manager.gd" id="4_cl16e"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_tkjlu")
@@ -18,5 +19,6 @@ wait_time = 10.0
 one_shot = true
 
 [node name="ProgressionManager" type="Node2D" parent="."]
+script = ExtResource("4_cl16e")
 
 [connection signal="timeout" from="SaveGame" to="." method="_on_save_game_timeout"]
