@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_mi3pc")
 type = 0
-max_capacity = 10
+max_capacity = 5
 background_sprite = ExtResource("1_g8rmc")
