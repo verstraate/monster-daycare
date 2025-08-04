@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=11 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" uid="uid://b4dg8jdvwdc7h" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
@@ -9,9 +9,6 @@
 [ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="7_1j37f"]
 [ext_resource type="Texture2D" uid="uid://b1ejn0q8u4s2i" path="res://Assets/Sprites/plus.png" id="7_g2t2n"]
 [ext_resource type="Resource" uid="uid://cwjm80eb4sc3s" path="res://Resources/Monsters/gaia.tres" id="8_66jej"]
-[ext_resource type="Resource" uid="uid://bq63fe1u7chxe" path="res://Resources/Monsters/salamander.tres" id="9_cw5ys"]
-[ext_resource type="Resource" uid="uid://bqp3ucknwv2rc" path="res://Resources/Monsters/sylph.tres" id="10_a6oe6"]
-[ext_resource type="Resource" uid="uid://4gclqar1tqq5" path="res://Resources/Monsters/undine.tres" id="11_p0elb"]
 [ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="13_1g7en"]
 
 [node name="UI" type="CanvasLayer" groups=["UI"]]
@@ -156,7 +153,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_dxera")
 script = ExtResource("6_uvm37")
-monsters_for_sale = Array[ExtResource("7_1j37f")]([ExtResource("8_66jej"), ExtResource("9_cw5ys"), ExtResource("10_a6oe6"), ExtResource("11_p0elb")])
+monsters_for_sale = Array[ExtResource("7_1j37f")]([ExtResource("8_66jej")])
 
 [node name="Monsters" type="VBoxContainer" parent="MonsterShop"]
 layout_mode = 1

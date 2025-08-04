@@ -1,6 +1,8 @@
 class_name MonsterShop
 extends Panel
 
+static var Instance: MonsterShop
+
 @onready
 var monster_parent: BoxContainer = $Monsters
 const SHOP_ITEM = preload("res://_Scenes/ShopItem/shop_item.tscn")
@@ -11,9 +13,24 @@ signal shop_updated(monsters_changed: Array[BaseMonster])
 var monsters_displayed: Dictionary[String, ShopItem] = {}
 
 func _ready() -> void:
+	if Instance != null and Instance != self:
+		queue_free()
+		return
+	
+	Instance = self
+	
 	shop_updated.connect(_display_monsters)
 	_display_monsters(monsters_for_sale)
 
+func set_monsters_for_sale(monsters: Array[BaseMonster]) -> void:
+	if len(monsters_for_sale) > len(monsters):
+		return
+	
+	clear_monsters()
+	
+	monsters_for_sale = monsters
+	shop_updated.emit(monsters_for_sale)
+	
 func clear_monsters() -> void:
 	monsters_for_sale.clear()
 	for monster in monsters_displayed:
@@ -24,7 +41,12 @@ func add_monsters_to_shop(new_monsters: Array[BaseMonster]) -> void:
 	monsters_for_sale.append_array(new_monsters)
 	shop_updated.emit(new_monsters)
 
+func sort_monsters(a: BaseMonster, b: BaseMonster) -> bool:
+	return a.base_produce < b.base_produce
+
 func _display_monsters(monsters: Array[BaseMonster]) -> void:
+	monsters.sort_custom(sort_monsters)
+	
 	for monster in monsters:
 		if monsters_displayed.has(monster.id):
 			continue

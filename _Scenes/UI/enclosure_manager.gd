@@ -115,6 +115,14 @@ func _generate_currency() -> void:
 		for monster in enclosure.monsters:
 			MoneyManager.Instance.adjust_money(monster.monster_data.base_produce)
 
+func get_currency_per_tick() -> IdleNumber:
+	var currency: IdleNumber = IdleNumber.new()
+	for enclosure in enclosures:
+		for monster in enclosure.monsters:
+			currency.add(monster.monster_data.base_produce)
+	
+	return currency
+
 func save() -> Dictionary:
 	return {
 		"path": get_path(),
