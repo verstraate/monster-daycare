@@ -8,7 +8,7 @@ const SHOP_ITEM = preload("res://_Scenes/ShopItem/shop_item.tscn")
 @export var monsters_for_sale: Array[BaseMonster] = []
 signal shop_updated(monsters_changed: Array[BaseMonster])
 
-var monsters_displayed: Dictionary = {}
+var monsters_displayed: Dictionary[String, ShopItem] = {}
 
 func _ready() -> void:
 	shop_updated.connect(_display_monsters)
