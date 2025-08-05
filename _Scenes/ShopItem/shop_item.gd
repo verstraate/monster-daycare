@@ -10,6 +10,7 @@ var _is_setup: bool = false
 
 var monster: BaseMonster
 var price: IdleNumber
+@export var price_multiplier: float = 5
 
 func setup_item(new_monster: BaseMonster) -> void:
 	if !_is_setup:
@@ -47,5 +48,5 @@ func _on_pressed() -> void:
 	active_enclosure.try_add_monster(new_monster)
 	new_monster.setup_monster(monster)
 	
-	price.multiply(2)
+	price.multiply(price_multiplier)
 	price_label.text = "$%s" % price.display_value(2)
