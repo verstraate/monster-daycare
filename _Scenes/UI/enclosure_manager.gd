@@ -6,14 +6,16 @@ static var Instance: EnclosureManager
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
+@export_group("Enclosure Cost")
+@export var enclosure_start_cost: String
+@export_range(1, 1000) var enclosure_cost_rate: float = 100
 var enclosure_cost: IdleNumber = IdleNumber.new("0")
 signal cost_updated(new_cost: IdleNumber)
 
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
-@export_range(1, 100) var enclosure_cost_rate: float = 10
 
-@export_group("Swipe Settings")
+@export_group("Swipe")
 @export_range(100, 500) var swipe_threshold: int
 @export_range(0, 1) var swipe_duration: float
 var swipe_dir: int = 0
@@ -67,7 +69,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if enclosures.size() > 0:
 		enclosure_cost.multiply(enclosure_cost_rate)
 	else:
-		enclosure_cost.set_value("10000")
+		enclosure_cost.set_value(enclosure_start_cost)
 	cost_updated.emit(enclosure_cost)
 	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
