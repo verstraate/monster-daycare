@@ -4,13 +4,19 @@ extends CanvasLayer
 static var Instance: UIManager
 
 @onready
-var _money: RichTextLabel = $%MoneyLabel
-@onready
-var _enclosure_cost: Label = $%EnclosureCost
-@onready
 var _loading: Panel = $%Loading
 @onready
 var _loading_label: RichTextLabel = $%LoadingLabel
+
+@onready
+var _money: RichTextLabel = $%MoneyLabel
+@onready
+var _enclosure_cost: Label = $%EnclosureCost
+
+@onready
+var _train_menu: TrainMenu = $%TrainMenu
+@onready
+var _train_menu_container: Button = $TrainMenuContainer
 
 var _loading_cycle_active: bool = true
 var _loading_cycle_duration: float = 1.0
@@ -29,6 +35,8 @@ func _ready() -> void:
 	
 	EnclosureManager.Instance.cost_updated.connect(update_enclosure_cost_label)
 	update_enclosure_cost_label(EnclosureManager.Instance.enclosure_cost)
+	
+	toggle_train_menu_visibility(false)
 
 func _process(delta: float) -> void:
 	if _loading_cycle_active:
@@ -53,3 +61,16 @@ func update_money_label(value: IdleNumber) -> void:
 
 func update_enclosure_cost_label(value: IdleNumber) -> void:
 	_enclosure_cost.text = "$%s" % value.display_value(2)
+
+func toggle_train_menu_visibility(value: bool) -> void:
+	_train_menu_container.visible = value
+
+func _on_train_button_pressed() -> void:
+	_train_menu.change_enclosure(EnclosureManager.Instance.selected_enclosure)
+	toggle_train_menu_visibility(true)
+
+func _on_train_menu_container_pressed() -> void:
+	toggle_train_menu_visibility(false)
+
+func _on_close_train_menu_pressed() -> void:
+	toggle_train_menu_visibility(false)
