@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://lpo0oimwllvt"]
+
+[ext_resource type="Script" uid="uid://3720yursb7cx" path="res://_Scenes/TrainMonsterOption/train_monster_option.gd" id="1_ie6to"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie6to"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_fcyq4"]
+Button/styles/disabled = SubResource("StyleBoxFlat_ie6to")
+Button/styles/focus = SubResource("StyleBoxFlat_ie6to")
+Button/styles/hover = SubResource("StyleBoxFlat_ie6to")
+Button/styles/normal = SubResource("StyleBoxFlat_ie6to")
+Button/styles/pressed = SubResource("StyleBoxFlat_ie6to")
+
+[node name="TrainMonsterOption" type="Button"]
+offset_right = 8.0
+offset_bottom = 54.0
+theme = SubResource("Theme_fcyq4")
+script = ExtResource("1_ie6to")
+
+[node name="Info" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 1.0
+offset_bottom = 54.0
+
+[node name="Name" type="Label" parent="Info"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Info"]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="Info"]
+layout_mode = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
