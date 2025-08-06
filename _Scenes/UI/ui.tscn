@@ -170,7 +170,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_qjjww")
 text = "train
-monsters
+monster
 "
 
 [node name="MonsterShop" type="Panel" parent="." groups=["Persist"]]
@@ -197,6 +197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TrainMenuContainer" type="Button" parent="."]
+visible = false
 z_index = 5
 anchors_preset = 15
 anchor_right = 1.0
