@@ -116,9 +116,7 @@ func _handle_swipe() -> void:
 	selected_enclosure = next_enclosure
 
 func _generate_currency() -> void:
-	for enclosure in enclosures:
-		for monster in enclosure.monsters:
-			MoneyManager.Instance.adjust_money(monster.monster_data.base_produce)
+	MoneyManager.Instance.adjust_money(get_currency_per_tick().array_to_num())
 
 func get_currency_per_tick() -> IdleNumber:
 	var currency: IdleNumber = IdleNumber.new()
