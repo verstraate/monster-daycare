@@ -70,18 +70,7 @@ func toggle_train_menu_visibility(value: bool) -> void:
 	_train_menu_container.visible = value
 
 func _on_train_button_pressed() -> void:
-	#_train_menu.change_enclosure(Globals.enclosure_manager.selected_enclosure)
-	#toggle_train_menu_visibility(true)
-	if len(Globals.enclosure_manager.enclosures) == 0:
-		return
-	
-	var temp_enclosure: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
-	
-	if len(temp_enclosure.monsters) == 0:
-		return
-	
-	var temp_monster: Monster = temp_enclosure.monsters[0]
-	Globals.game_manager.load_training(temp_monster)
+	toggle_train_menu_visibility(true)
 
 func _on_train_menu_container_pressed() -> void:
 	toggle_train_menu_visibility(false)

@@ -13,6 +13,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_ie6to")
 Button/styles/pressed = SubResource("StyleBoxFlat_ie6to")
 
 [node name="TrainMonsterOption" type="Button"]
+custom_minimum_size = Vector2(100, 120)
 offset_right = 8.0
 offset_bottom = 54.0
 theme = SubResource("Theme_fcyq4")

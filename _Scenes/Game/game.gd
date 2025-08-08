@@ -35,6 +35,10 @@ func _ready() -> void:
 	
 	Globals.enclosure_manager.setup_enclosures_from_save()
 	
+	if len(Globals.enclosure_manager.enclosures) > 0:
+		var curr_enclosure_selected: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
+		Globals.enclosure_manager.enclosure_changed.emit(curr_enclosure_selected)
+	
 	Globals.ui_manager.update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	Globals.ui_manager.update_money_label(Globals.money_manager.get_money())
 	
@@ -48,6 +52,7 @@ func load_training(monster_to_train: Monster) -> void:
 	
 	timer = get_tree().create_timer(load_time / 2)
 	Globals.ui_manager.toggle_loading(true)
+	Globals.ui_manager.toggle_train_menu_visibility(false)
 	
 	SaveGame.save_game()
 	
@@ -69,6 +74,9 @@ func complete_training() -> void:
 	
 	timer = get_tree().create_timer(load_time / 2)
 	Globals.ui_manager.toggle_loading(true)
+	
+	var curr_enclosure_selected: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
+	curr_enclosure_selected.monsters_updated.emit()
 	
 	training.queue_free()
 	SaveGame.save_game()

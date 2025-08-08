@@ -11,5 +11,5 @@ sprite = ExtResource("2_3kbol")
 price = "1000000000"
 base_produce = "10000"
 base_upgrade = "2000000000"
-base_upgrade_multiplier = 10.0
+base_upgrade_multiplier = 2.0
 type = 2

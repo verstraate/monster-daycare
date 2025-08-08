@@ -97,6 +97,10 @@ func complete() -> void:
 	
 	await filter_tween.finished
 	
+	var training_cost_multiplier: float = _monster_in_training.monster_data.base_upgrade_multiplier * pow(2, _monster_in_training.level - 1)
+	_monster_in_training.level += 1
+	_monster_in_training.training_cost.multiply(training_cost_multiplier)
+	
 	var old_produce: String = _monster_in_training.produce.display_value(2)
 	_monster_in_training.produce.multiply(2)
 	var new_produce: String = _monster_in_training.produce.display_value(2)

@@ -45,8 +45,8 @@ func _on_pressed() -> void:
 		return
 	
 	var new_monster: Monster = MONSTER.instantiate()
-	active_enclosure.try_add_monster(new_monster)
 	new_monster.setup_monster(monster)
+	active_enclosure.try_add_monster(new_monster)
 	
 	price.multiply(price_multiplier)
 	price_label.text = "$%s" % price.display_value(2)

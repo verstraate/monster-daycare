@@ -12,6 +12,7 @@ signal cost_updated(new_cost: IdleNumber)
 
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
+signal enclosure_changed(new_enclosure: Enclosure)
 
 @export_group("Swipe")
 @export_range(100, 500) var swipe_threshold: int
@@ -90,6 +91,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	_tween.tween_property(enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = enclosures.size() - 1
+	enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _handle_swipe() -> void:
 	if _tween != null and _tween.is_running():
@@ -112,6 +114,7 @@ func _handle_swipe() -> void:
 	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = next_enclosure
+	enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _generate_currency() -> void:
 	Globals.money_manager.adjust_money(get_currency_per_tick().array_to_num())
