@@ -3,7 +3,7 @@ class_name TrainMenu extends Panel
 const TRAIN_MONSTER_OPTION = preload("res://_Scenes/TrainMonsterOption/train_monster_option.tscn")
 
 @onready
-var _monsters_parent: HBoxContainer = $Monsters
+var _monsters_parent: HFlowContainer = $Monsters
 
 var current_enclosure: Enclosure
 var _monsters_displayed: Array[TrainMonsterOption] = []
@@ -34,7 +34,7 @@ func _update_monsters() -> void:
 			_monsters_parent.add_child(new_monster)
 			_monsters_displayed.append(new_monster)
 	elif diff > 0:
-		for i in range(to_display_length, current_enclosure.active_enclosure.max_capacity + 1):
+		for i in range(to_display_length, current_enclosure.active_enclosure.max_capacity):
 			_monsters_displayed[i].visible = false
 	
 	for i in range(to_display_length):

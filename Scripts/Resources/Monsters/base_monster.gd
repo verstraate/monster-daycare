@@ -9,4 +9,5 @@ extends Resource
 @export var base_produce: String
 @export var base_upgrade: String
 @export var base_upgrade_multiplier: float
+@export var max_level: int = 5
 @export var type: Utils.MONSTER_TYPES

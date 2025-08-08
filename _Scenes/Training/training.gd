@@ -29,6 +29,7 @@ func _ready() -> void:
 	filter.color = Color(filter.color, 0)
 	filter.visible = true
 	training_finished.visible = false
+	training_status.text = "%d/%d" % [training_remaining, training_length]
 	
 	tween_duration = input_delay / 2
 
@@ -77,7 +78,7 @@ func set_monster_in_training(new_monster: Monster) -> void:
 	
 	monster = _monster_in_training.duplicate()
 	add_child(monster)
-	monster.position = Vector2(size.x / 2 - monster.size.x, -position.y * 1.5)
+	monster.position = Vector2(size.x / 2 - monster.size.x, size.y - monster.size.y * 3)
 	monster.scale = Vector2.ONE * 2
 
 func start() -> void:
