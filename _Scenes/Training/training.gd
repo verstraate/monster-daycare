@@ -24,6 +24,8 @@ var training_remaining: int = 0
 var delay_time_remaining: float = 0
 
 func _ready() -> void:
+	position.y = size.y * 2 / 3
+	
 	filter.color = Color(filter.color, 0)
 	filter.visible = true
 	training_finished.visible = false
@@ -75,7 +77,7 @@ func set_monster_in_training(new_monster: Monster) -> void:
 	
 	monster = _monster_in_training.duplicate()
 	add_child(monster)
-	monster.position = Vector2(size.x / 2 - monster.size.x, size.y / 4 * 3 - monster.size.y)
+	monster.position = Vector2(size.x / 2 - monster.size.x, -position.y * 1.5)
 	monster.scale = Vector2.ONE * 2
 
 func start() -> void:
