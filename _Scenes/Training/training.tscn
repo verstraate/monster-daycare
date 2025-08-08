@@ -31,13 +31,16 @@ texture = ExtResource("2_h3a4d")
 expand_mode = 4
 stretch_mode = 6
 script = ExtResource("1_cboif")
+training_length = 5
 
 [node name="TrainingFinishedFilter" type="ColorRect" parent="."]
 z_index = 5
-layout_mode = 0
-offset_top = 400.0
-offset_right = 1152.0
-offset_bottom = 1048.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.0611, 0.0771767, 0.13, 1)
 
 [node name="TrainingFinished" type="Panel" parent="TrainingFinishedFilter"]
