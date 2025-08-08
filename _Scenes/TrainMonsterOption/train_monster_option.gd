@@ -5,6 +5,8 @@ var _name_label: Label = $Info/Name
 @onready
 var _icon: TextureRect = $Info/Icon
 @onready
+var _level_label: Label = $Info/Level
+@onready
 var _cost_label: Label = $Info/Cost
 
 var _monster: Monster
@@ -15,6 +17,7 @@ func setup(new_monster: Monster) -> void:
 	
 	_name_label.text = _monster.monster_data.display_name
 	_icon.texture = _monster.monster_data.sprite
+	_level_label.text = "Level: %d" % _monster.level
 	_cost_label.text = "$%s" % _monster.training_cost.display_value(2)
 
 func _on_pressed() -> void:
