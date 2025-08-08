@@ -1,6 +1,8 @@
 class_name Training extends Control
 
 @onready
+var training_status: Label = $TrainingStatus/Value
+@onready
 var filter: ColorRect = $TrainingFinishedFilter
 @onready
 var training_finished: Panel = $TrainingFinishedFilter/TrainingFinished
@@ -16,14 +18,15 @@ var tween_duration: float
 
 var training_active: bool = false
 @export_range(1, 50) var training_length: int = 10
-var training_remaining: int
+var training_remaining: int = 0
 
 @export_range(0, 10) var input_delay: float = 1
 var delay_time_remaining: float = 0
 
 func _ready() -> void:
-	training_finished.visible = false
 	filter.color = Color(filter.color, 0)
+	filter.visible = true
+	training_finished.visible = false
 	
 	tween_duration = input_delay / 2
 
@@ -31,13 +34,15 @@ func _process(delta: float) -> void:
 	if not training_active:
 		return
 	
-	delay_time_remaining -= delta
+	delay_time_remaining -= max(delta, 0)
 	
 	if delay_time_remaining > 0:
 		return
 	
 	if Input.is_action_just_pressed("press"):
-		training_remaining -= 1
+		training_remaining += 1
+		
+		training_status.text = "%d/%d" % [training_remaining, training_length]
 		
 		var monster_pos: Vector2 = monster.position
 		monster_tween = create_tween()
@@ -62,7 +67,7 @@ func _process(delta: float) -> void:
 		
 		delay_time_remaining = input_delay
 	
-	if training_remaining <= 0:
+	if training_remaining >= training_length:
 		complete()
 
 func set_monster_in_training(new_monster: Monster) -> void:
@@ -72,8 +77,6 @@ func set_monster_in_training(new_monster: Monster) -> void:
 	add_child(monster)
 	monster.position = Vector2(size.x / 2 - monster.size.x, size.y / 4 * 3 - monster.size.y)
 	monster.scale = Vector2.ONE * 2
-	
-	training_remaining = training_length
 
 func start() -> void:
 	training_active = true

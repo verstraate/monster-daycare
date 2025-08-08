@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2o7uyspt6dgw"]
+[gd_scene load_steps=6 format=3 uid="uid://b2o7uyspt6dgw"]
 
 [ext_resource type="Script" uid="uid://ba8vps65ruj1s" path="res://_Scenes/Training/training.gd" id="1_cboif"]
 [ext_resource type="Texture2D" uid="uid://dvvogl73722t3" path="res://Assets/Sprites/enclosure_plains.png" id="2_h3a4d"]
@@ -6,6 +6,16 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfvn2"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfyb0"]
+bg_color = Color(0.0588235, 0.0745098, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.0588235, 0.0745098, 0.12549, 0.482353)
+shadow_size = 3
 anti_aliasing = false
 
 [node name="Training" type="TextureRect"]
@@ -28,7 +38,7 @@ layout_mode = 0
 offset_top = 400.0
 offset_right = 1152.0
 offset_bottom = 1048.0
-color = Color(0.0588235, 0.0745098, 0.12549, 0.470588)
+color = Color(0.0611, 0.0771767, 0.13, 1)
 
 [node name="TrainingFinished" type="Panel" parent="TrainingFinishedFilter"]
 layout_mode = 1
@@ -80,12 +90,36 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 50
 text = "OLD: $100"
 
 [node name="NewProduce" type="Label" parent="TrainingFinishedFilter/TrainingFinished/ProduceChanges"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/outline_size = 9
 theme_override_font_sizes/font_size = 48
 text = "NEW: $200"
+
+[node name="TrainingStatus" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 410.0
+offset_right = 210.0
+offset_bottom = 510.0
+theme = ExtResource("3_mfvn2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_pfyb0")
+
+[node name="Value" type="Label" parent="TrainingStatus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 81
+text = "0/10"
+horizontal_alignment = 1
+vertical_alignment = 1
