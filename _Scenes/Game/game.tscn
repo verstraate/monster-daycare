@@ -23,6 +23,9 @@ locked_monsters = Array[ExtResource("4_6a16g")]([ExtResource("5_3ebme"), ExtReso
 
 [node name="UI" parent="." instance=ExtResource("1_65hya")]
 
+[node name="TrainingParent" type="CanvasLayer" parent="."]
+layer = 5
+
 [node name="SaveGame" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2o7uyspt6dgw"]
+
+[ext_resource type="Script" uid="uid://ba8vps65ruj1s" path="res://_Scenes/Training/training.gd" id="1_cboif"]
+[ext_resource type="Texture2D" uid="uid://dvvogl73722t3" path="res://Assets/Sprites/enclosure_plains.png" id="2_h3a4d"]
+
+[node name="Training" type="TextureRect"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_h3a4d")
+expand_mode = 4
+stretch_mode = 6
+script = ExtResource("1_cboif")

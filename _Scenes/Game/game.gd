@@ -1,25 +1,30 @@
 class_name GameManager
 extends Node2D
 
-static var Instance: GameManager
 
 @onready
 var _save_game_timer: Timer = $SaveGame
+@onready
+var _training_parent: CanvasLayer = $TrainingParent
 
 @export var load_time: float = 2
+var timer: SceneTreeTimer
+
+const TRAINING = preload("res://_Scenes/Training/training.tscn")
+var training: Training
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.game_manager != null and Globals.game_manager != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.game_manager = self
 	
 	get_tree().paused = true
-	UIManager.Instance.toggle_loading(true)
+	Globals.ui_manager.toggle_loading(true)
 	
 	# Fake loading timer so changing scenes feels smoother
-	var timer: SceneTreeTimer = get_tree().create_timer(load_time)
+	timer = get_tree().create_timer(load_time)
 	
 	SaveGame.load_game()
 	SaveGame.save_game() # Override current save for with idle earnings and updated values
@@ -28,14 +33,52 @@ func _ready() -> void:
 	if timer.time_left != 0:
 		await timer.timeout
 	
-	EnclosureManager.Instance.setup_enclosures_from_save()
+	Globals.enclosure_manager.setup_enclosures_from_save()
 	
-	UIManager.Instance.update_enclosure_cost_label(EnclosureManager.Instance.enclosure_cost)
-	UIManager.Instance.update_money_label(MoneyManager.Instance.get_money())
+	Globals.ui_manager.update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
+	Globals.ui_manager.update_money_label(Globals.money_manager.get_money())
 	
-	UIManager.Instance.toggle_loading(false)
+	Globals.ui_manager.toggle_loading(false)
+	
 	_save_game_timer.start()
 	get_tree().paused = false
+
+func load_training(monster_to_train: Monster) -> void:
+	_save_game_timer.stop()
+	
+	timer = get_tree().create_timer(load_time / 2)
+	Globals.ui_manager.toggle_loading(true)
+	
+	SaveGame.save_game()
+	
+	training = TRAINING.instantiate()
+	var training_pos: Vector2 = training.position
+	_training_parent.add_child(training)
+	training.position = training_pos
+	training.set_monster_in_training(monster_to_train)
+	
+	Globals.ui_manager.loading_timeout.connect(training.start)
+	
+	if timer.time_left > 0:
+		await timer.timeout
+	
+	Globals.ui_manager.toggle_loading(false)
+
+func complete_training() -> void:
+	Globals.ui_manager.loading_timeout.disconnect(training.start)
+	
+	timer = get_tree().create_timer(load_time / 2)
+	Globals.ui_manager.toggle_loading(true)
+	
+	training.queue_free()
+	SaveGame.save_game()
+	
+	if timer.time_left > 0:
+		await timer.timeout
+	
+	Globals.ui_manager.toggle_loading(false)
+	
+	_save_game_timer.start()
 
 func _on_save_game_timeout() -> void:
 	SaveGame.save_game()
