@@ -96,6 +96,6 @@ Project Link: [https://github.com/verstraate/mobile-project-1](https://github.co
 [linkedin-url]: https://linkedin.com/in/john-verstraate-859a93267/
 [itchio-shield]: https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white
 [itchio-url]: https://verstraate.itch.io/monster-daycare
-[product-screenshot]: https://i.imgur.com/5nEyqjp.png
+[product-screenshot]: https://i.imgur.com/CWNN7lM.png
 [Godot]: https://img.shields.io/badge/Made%20with-Godot-478CBF?style=for-the-badge&logo=godot%20engine&logoColor=white
 [Godot-url]: https://godotengine.org
