@@ -1,22 +1,20 @@
 class_name ProgressionManager
 extends Node2D
 
-static var Instance: ProgressionManager
-
 @export var locked_monsters: Array[BaseMonster]
 var _unlock_requirements: Dictionary[String, IdleNumber] = {}
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.progression_manager != null and Globals.progression_manager != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.progression_manager = self
 	
 	for monster in locked_monsters:
 		_unlock_requirements[monster.id] = IdleNumber.new(monster.price)
 	
-	MoneyManager.Instance.money_updated.connect(check_for_unlocks)
+	Globals.money_manager.money_updated.connect(check_for_unlocks)
 
 func check_for_unlocks(money: IdleNumber) -> void:
 	var monsters: Array[BaseMonster] = []
@@ -33,7 +31,7 @@ func unlock_monsters(monsters: Array[BaseMonster]) -> void:
 		if _unlock_requirements.has(monster.id):
 			_unlock_requirements.erase(monster.id)
 	
-	MonsterShop.Instance.add_monsters_to_shop(monsters)
+	Globals.monster_shop.add_monsters_to_shop(monsters)
 
 func save() -> Dictionary:
 	var locked_monsters_to_save: Array[String]

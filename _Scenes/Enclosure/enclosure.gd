@@ -11,6 +11,8 @@ var _setup: bool = false
 var active_enclosure: BaseEnclosure
 var monsters: Array[Monster] = []
 
+signal monsters_updated
+
 func setup_enclosure(new_enclosure: BaseEnclosure = null, from_save: bool = false) -> void:
 	if not _setup:
 		_background = $%Background
@@ -41,6 +43,7 @@ func try_add_monster(new_monster: Monster) -> bool:
 	monsters.append(new_monster)
 	
 	_update_capacity()
+	monsters_updated.emit()
 	return true
 
 func _update_capacity() -> void:
@@ -55,6 +58,9 @@ func save() -> Dictionary:
 			"pos_x": monster.position.x,
 			"pos_y": monster.position.y,
 			"scale": monster.scale.x,
+			"produce": monster.produce.array_to_num(),
+			"training_cost": monster.training_cost.array_to_num(),
+			"level": monster.level
 		})
 	
 	return {

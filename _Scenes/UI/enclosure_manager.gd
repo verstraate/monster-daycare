@@ -1,19 +1,20 @@
 class_name EnclosureManager
 extends Control
 
-static var Instance: EnclosureManager
-
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
+@export_group("Enclosure Cost")
+@export var enclosure_start_cost: String
+@export_range(1, 1000) var enclosure_cost_rate: float = 100
 var enclosure_cost: IdleNumber = IdleNumber.new("0")
 signal cost_updated(new_cost: IdleNumber)
 
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
-@export_range(1, 100) var enclosure_cost_rate: float = 10
+signal enclosure_changed(new_enclosure: Enclosure)
 
-@export_group("Swipe Settings")
+@export_group("Swipe")
 @export_range(100, 500) var swipe_threshold: int
 @export_range(0, 1) var swipe_duration: float
 var swipe_dir: int = 0
@@ -23,13 +24,13 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.enclosure_manager != null and Globals.enclosure_manager != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.enclosure_manager = self
 	
-	MoneyManager.Instance.tick.timeout.connect(_generate_currency)
+	Globals.money_manager.tick.timeout.connect(_generate_currency)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -61,13 +62,13 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
 		return
 	
-	if not MoneyManager.Instance.try_purchase(enclosure_cost.array_to_num()):
+	if not Globals.money_manager.try_purchase(enclosure_cost.array_to_num()):
 		return
 	
 	if enclosures.size() > 0:
 		enclosure_cost.multiply(enclosure_cost_rate)
 	else:
-		enclosure_cost.set_value("10000")
+		enclosure_cost.set_value(enclosure_start_cost)
 	cost_updated.emit(enclosure_cost)
 	
 	var pos_mod: int = 0 if enclosures.size() == 0 else 1
@@ -90,6 +91,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	_tween.tween_property(enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = enclosures.size() - 1
+	enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _handle_swipe() -> void:
 	if _tween != null and _tween.is_running():
@@ -112,17 +114,16 @@ func _handle_swipe() -> void:
 	_tween.tween_property(target_enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = next_enclosure
+	enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _generate_currency() -> void:
-	for enclosure in enclosures:
-		for monster in enclosure.monsters:
-			MoneyManager.Instance.adjust_money(monster.monster_data.base_produce)
+	Globals.money_manager.adjust_money(get_currency_per_tick().array_to_num())
 
 func get_currency_per_tick() -> IdleNumber:
 	var currency: IdleNumber = IdleNumber.new()
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
-			currency.add(monster.monster_data.base_produce)
+			currency.add(monster.produce.array_to_num())
 	
 	return currency
 
