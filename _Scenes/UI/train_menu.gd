@@ -21,7 +21,7 @@ func change_enclosure(new_enclosure: int) -> void:
 	enclosure_changed.emit()
 
 func _update_monsters() -> void:
-	var enclosure: Enclosure = EnclosureManager.Instance.enclosures[current_enclosure]
+	var enclosure: Enclosure = Globals.enclosure_manager.enclosures[current_enclosure]
 	var monsters_to_display: Array[Monster] = enclosure.monsters
 	
 	var to_display_length: int = len(monsters_to_display)

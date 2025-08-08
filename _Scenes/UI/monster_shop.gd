@@ -1,8 +1,6 @@
 class_name MonsterShop
 extends Panel
 
-static var Instance: MonsterShop
-
 @onready
 var monster_parent: BoxContainer = $Monsters
 const SHOP_ITEM = preload("res://_Scenes/ShopItem/shop_item.tscn")
@@ -13,11 +11,11 @@ signal shop_updated(monsters_changed: Array[BaseMonster])
 var monsters_displayed: Dictionary[String, ShopItem] = {}
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.monster_shop != null and Globals.monster_shop != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.monster_shop = self
 	
 	shop_updated.connect(_display_monsters)
 	_display_monsters(monsters_for_sale)

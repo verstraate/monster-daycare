@@ -7,6 +7,7 @@ var keys_to_ignore: Array[String] = [
 	"pos_x", 
 	"pos_y",
 	"scale",
+	"produce",
 	"_save_time",
 	"currency_per_tick",
 	"price"
@@ -124,6 +125,7 @@ func _setup_monsters(monsters: Array, new_object: Enclosure) -> void:
 		new_object.add_child(new_monster)
 		new_monster.position = Vector2(monster["pos_x"], monster["pos_y"])
 		new_monster.scale = Vector2.ONE * monster["scale"]
+		new_monster.produce = IdleNumber.new(monster["produce"])
 		new_monster.monster_data = load(monster["monster_data"]) as BaseMonster
 		monsters_to_add.append(new_monster)
 	

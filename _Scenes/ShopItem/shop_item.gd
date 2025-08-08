@@ -34,14 +34,14 @@ func setup_item(new_monster: BaseMonster) -> void:
 	price_label.text = "$%s" % price.display_value(2)
 
 func _on_pressed() -> void:	
-	if EnclosureManager.Instance.enclosures.size() == 0:
+	if Globals.enclosure_manager.enclosures.size() == 0:
 		return
 	
-	var active_enclosure: Enclosure = EnclosureManager.Instance.enclosures[EnclosureManager.Instance.selected_enclosure]
+	var active_enclosure: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
 	if active_enclosure.at_max_capacity():
 		return
 	
-	if not MoneyManager.Instance.try_purchase(price.array_to_num()):
+	if not Globals.money_manager.try_purchase(price.array_to_num()):
 		return
 	
 	var new_monster: Monster = MONSTER.instantiate()

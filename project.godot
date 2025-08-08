@@ -20,6 +20,7 @@ config/icon="res://Assets/Sprites/money.png"
 
 Utils="*res://Scripts/Utils.gd"
 SaveGame="*res://Scripts/SaveGame.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [debug]
 

@@ -1,8 +1,6 @@
 class_name MoneyManager
 extends Node2D
 
-static var Instance: MoneyManager
-
 @onready
 var tick: Timer = $%Tick
 
@@ -13,11 +11,11 @@ var _money: IdleNumber
 signal money_updated(value: IdleNumber)
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.money_manager != null and Globals.money_manager != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.money_manager = self
 	
 	_money = IdleNumber.new(starting_money)
 
@@ -55,7 +53,7 @@ func save() -> Dictionary:
 		"path": get_path(),
 		"_money": _money.array_to_num(),
 		"_save_time": Time.get_datetime_dict_from_system(),
-		"currency_per_tick": EnclosureManager.Instance.get_currency_per_tick().array_to_num()
+		"currency_per_tick": Globals.enclosure_manager.get_currency_per_tick().array_to_num()
 	}
 
 func load_save(data: Dictionary) -> void:

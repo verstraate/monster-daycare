@@ -1,8 +1,6 @@
 class_name EnclosureManager
 extends Control
 
-static var Instance: EnclosureManager
-
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
@@ -25,13 +23,13 @@ var first_swipe_position: Vector2
 var curr_swipe_position: Vector2
 
 func _ready() -> void:
-	if Instance != null and Instance != self:
+	if Globals.enclosure_manager != null and Globals.enclosure_manager != self:
 		queue_free()
 		return
 	
-	Instance = self
+	Globals.enclosure_manager = self
 	
-	MoneyManager.Instance.tick.timeout.connect(_generate_currency)
+	Globals.money_manager.tick.timeout.connect(_generate_currency)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -63,7 +61,7 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
 		return
 	
-	if not MoneyManager.Instance.try_purchase(enclosure_cost.array_to_num()):
+	if not Globals.money_manager.try_purchase(enclosure_cost.array_to_num()):
 		return
 	
 	if enclosures.size() > 0:
@@ -116,13 +114,13 @@ func _handle_swipe() -> void:
 	selected_enclosure = next_enclosure
 
 func _generate_currency() -> void:
-	MoneyManager.Instance.adjust_money(get_currency_per_tick().array_to_num())
+	Globals.money_manager.adjust_money(get_currency_per_tick().array_to_num())
 
 func get_currency_per_tick() -> IdleNumber:
 	var currency: IdleNumber = IdleNumber.new()
 	for enclosure in enclosures:
 		for monster in enclosure.monsters:
-			currency.add(monster.monster_data.base_produce)
+			currency.add(monster.produce.array_to_num())
 	
 	return currency
 

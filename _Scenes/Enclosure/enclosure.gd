@@ -55,6 +55,7 @@ func save() -> Dictionary:
 			"pos_x": monster.position.x,
 			"pos_y": monster.position.y,
 			"scale": monster.scale.x,
+			"produce": monster.produce.array_to_num()
 		})
 	
 	return {
