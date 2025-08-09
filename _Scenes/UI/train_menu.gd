@@ -9,14 +9,14 @@ var current_enclosure: Enclosure
 var _monsters_displayed: Array[TrainMonsterOption] = []
 
 func _ready() -> void:
-	Globals.enclosure_manager.enclosure_changed.connect(_on_enclosure_changed)
+	SignalBus.selected_enclosure_changed.connect(_on_enclosure_changed)
 
 func _on_enclosure_changed(new_enclosure: Enclosure) -> void:
 	if current_enclosure != null:
-		current_enclosure.monsters_updated.disconnect(_update_monsters)
+		SignalBus.monsters_updated.disconnect(_update_monsters)
 	
 	current_enclosure = new_enclosure
-	current_enclosure.monsters_updated.connect(_update_monsters)
+	SignalBus.monsters_updated.connect(_update_monsters)
 	
 	_update_monsters()
 

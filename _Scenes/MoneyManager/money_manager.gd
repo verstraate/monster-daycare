@@ -1,9 +1,6 @@
 class_name MoneyManager
 extends Node2D
 
-@onready
-var tick: Timer = $%Tick
-
 @export
 var starting_money: String
 var _money: IdleNumber
@@ -35,7 +32,7 @@ func adjust_money(value: String) -> void:
 	else:
 		_money.add(value)
 	
-	money_updated.emit(_money)
+	SignalBus.money_updated.emit(_money)
 
 func can_afford(money_to_check: IdleNumber) -> bool:
 	return _money.compare(money_to_check)
@@ -58,3 +55,6 @@ func save() -> Dictionary:
 
 func load_save(data: Dictionary) -> void:
 	_money = IdleNumber.new(data["_money"])
+
+func _on_tick_timeout() -> void:
+	SignalBus.money_tick.emit()

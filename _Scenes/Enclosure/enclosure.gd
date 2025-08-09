@@ -11,8 +11,6 @@ var _setup: bool = false
 var active_enclosure: BaseEnclosure
 var monsters: Array[Monster] = []
 
-signal monsters_updated
-
 func setup_enclosure(new_enclosure: BaseEnclosure = null, from_save: bool = false) -> void:
 	if not _setup:
 		_background = $%Background
@@ -43,7 +41,7 @@ func try_add_monster(new_monster: Monster) -> bool:
 	monsters.append(new_monster)
 	
 	_update_capacity()
-	monsters_updated.emit()
+	SignalBus.monsters_updated.emit()
 	return true
 
 func _update_capacity() -> void:

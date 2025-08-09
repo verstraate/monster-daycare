@@ -19,11 +19,13 @@ config/icon="res://Assets/Sprites/money.png"
 [autoload]
 
 Utils="*res://Scripts/Utils.gd"
+SignalBus="*res://Scripts/SignalBus.gd"
 SaveGame="*res://Scripts/SaveGame.gd"
 Globals="*res://Scripts/Globals.gd"
 
 [debug]
 
+gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
 gdscript/warnings/narrowing_conversion=0
 
