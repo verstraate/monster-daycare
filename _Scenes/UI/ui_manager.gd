@@ -12,8 +12,6 @@ var _money: RichTextLabel = $%MoneyLabel
 var _enclosure_cost: Label = $%EnclosureCost
 
 @onready
-var _train_menu: TrainMenu = $%TrainMenu
-@onready
 var _train_menu_container: Button = $TrainMenuContainer
 
 var _loading_cycle_active: bool = true

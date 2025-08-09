@@ -25,17 +25,20 @@ func _update_monsters() -> void:
 	
 	var to_display_length: int = len(monsters_to_display)
 	if to_display_length == 0:
+		for i in range(len(_monsters_displayed)):
+			_monsters_displayed[i].visible = false
 		return
 	
-	var diff: int = len(_monsters_displayed) - len(monsters_to_display)
-	if diff < 0:
-		for i in range(abs(diff)):
+	if len(_monsters_displayed) < current_enclosure.active_enclosure.max_capacity:
+		for i in range(current_enclosure.active_enclosure.max_capacity):
 			var new_monster: TrainMonsterOption = TRAIN_MONSTER_OPTION.instantiate()
 			_monsters_parent.add_child(new_monster)
 			_monsters_displayed.append(new_monster)
-	elif diff > 0:
-		for i in range(to_display_length, current_enclosure.active_enclosure.max_capacity):
+	
+	if to_display_length < len(_monsters_displayed):
+		for i in range(to_display_length, len(_monsters_displayed)):
 			_monsters_displayed[i].visible = false
 	
 	for i in range(to_display_length):
 		_monsters_displayed[i].setup(monsters_to_display[i])
+		_monsters_displayed[i].visible = true

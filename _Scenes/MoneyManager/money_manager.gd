@@ -50,7 +50,7 @@ func save() -> Dictionary:
 		"path": get_path(),
 		"_money": _money.array_to_num(),
 		"_save_time": Time.get_datetime_dict_from_system(),
-		"currency_per_tick": Globals.enclosure_manager.get_currency_per_tick().array_to_num()
+		"currency_per_tick": Globals.enclosure_manager.currency_per_tick.array_to_num()
 	}
 
 func load_save(data: Dictionary) -> void:

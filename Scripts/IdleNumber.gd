@@ -75,7 +75,7 @@ func add(value: String) -> void:
 		
 		result.append(curr_place)
 	
-	while result.size() > 0 and result.back() == 0:
+	while result.size() > 1 and result.back() == 0:
 		result.pop_back()
 	
 	_num_places = result
@@ -110,7 +110,7 @@ func subtract(value: String) -> void:
 		
 		result.append(diff)
 	
-	while result.size() > 0 and result.back() == 0:
+	while result.size() > 1 and result.back() == 0:
 		result.pop_back()
 	
 	if result.size() == 0:
@@ -142,7 +142,7 @@ func multiply(value: float) -> void:
 		
 		result.append(curr_place)
 	
-	while result.size() > 0 and result.back() == 0:
+	while result.size() > 1 and result.back() == 0:
 		result.pop_back()
 	
 	_num_places = result

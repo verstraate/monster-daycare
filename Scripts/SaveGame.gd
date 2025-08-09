@@ -11,7 +11,6 @@ var keys_to_ignore: Array[String] = [
 	"level",
 	"training_cost",
 	"_save_time",
-	"currency_per_tick",
 	"price"
 ]
 
@@ -86,7 +85,7 @@ func load_game() -> void:
 				new_object.adjust_money(afk_earnings.array_to_num())
 				continue
 			
-			if i == "enclosure_cost":
+			if i == "enclosure_cost" or i == "currency_per_tick":
 				_setup_idle_number(new_object, i, node_data)
 				continue
 			
