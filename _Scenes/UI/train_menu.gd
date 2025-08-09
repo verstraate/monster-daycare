@@ -39,4 +39,3 @@ func _update_monsters() -> void:
 	
 	for i in range(to_display_length):
 		_monsters_displayed[i].setup(monsters_to_display[i])
-	

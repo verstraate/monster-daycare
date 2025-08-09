@@ -33,5 +33,5 @@ func _on_pressed() -> void:
 	if not Globals.money_manager.can_afford(_monster.training_cost):
 		return
 	
-	Globals.money_manager.adjust_money(_monster.training_cost.array_to_num())
+	Globals.money_manager.adjust_money("-%s" % _monster.training_cost.array_to_num())
 	Globals.game_manager.load_training(_monster)
