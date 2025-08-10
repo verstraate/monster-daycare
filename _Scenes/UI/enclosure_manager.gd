@@ -5,6 +5,8 @@ const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
 var currency_per_tick: IdleNumber = IdleNumber.new()
+var _all_monster_types: Dictionary[Utils.MONSTER_TYPES, int] = {}
+var _all_monster_preferences: Dictionary[Utils.MONSTER_TYPES, float] = {}
 
 @export_group("Enclosure Cost")
 @export var enclosure_start_cost: String
@@ -31,7 +33,7 @@ func _ready() -> void:
 	Globals.enclosure_manager = self
 	
 	SignalBus.money_tick.connect(_generate_currency)
-	SignalBus.monsters_updated.connect(get_currency_per_tick)
+	SignalBus.monsters_updated.connect(_on_monster_added)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -120,30 +122,34 @@ func _handle_swipe() -> void:
 func _generate_currency() -> void:
 	Globals.money_manager.adjust_money(currency_per_tick.array_to_num())
 
-func get_currency_per_tick() -> void:
-	var currency: IdleNumber = IdleNumber.new()
-	var types: Dictionary[Utils.MONSTER_TYPES, int] = {}
-	for enclosure in enclosures:
-		for monster in enclosure.monsters:
-			if types.has(monster.monster_data.type):
-				types[monster.monster_data.type] += 1
-			else:
-				types[monster.monster_data.type] = 1
+func _on_monster_added(new_monster: Monster = null) -> void:
+	if new_monster == null:
+		_get_currency_per_tick()
+		return
 	
-	var preferences: Dictionary[Utils.MONSTER_TYPES, float] = {}
-	for type in types:
-		preferences[type] = 1
-		for type_to_compare in types:
-			preferences[type] *= pow(1 + 0.5 * Utils.TYPE_PREFERENCES[type][type_to_compare], types[type] - 1)
+	var monster_type: Utils.MONSTER_TYPES = new_monster.monster_data.type
+	if _all_monster_types.has(monster_type):
+		_all_monster_types[monster_type] += 1
+	else:
+		_all_monster_types[monster_type] = 1
+	
+	for type_to_compare in _all_monster_types:
+		if _all_monster_preferences.has(monster_type):
+			_all_monster_preferences[monster_type] *= pow(1 + 0.5 * Utils.TYPE_PREFERENCES[monster_type][type_to_compare], _all_monster_types[monster_type] - 1)
+		else:
+			_all_monster_preferences[monster_type] = 1
+	
+	_get_currency_per_tick()
+
+func _get_currency_per_tick() -> void:
+	var currency: IdleNumber = IdleNumber.new()
 	
 	for enclosure in enclosures:
 		for i in range(len(enclosure.monsters)):
 			var monster: Monster = enclosure.monsters[i]
 			var currency_to_add: IdleNumber = IdleNumber.new(monster.produce.array_to_num())
-			currency_to_add.multiply(preferences[monster.monster_data.type])
+			currency_to_add.multiply(_all_monster_preferences[monster.monster_data.type])
 			currency.add(currency_to_add.array_to_num())
-	
-	print("new currency_per_tick: %s" % currency.array_to_num())
 	
 	currency_per_tick = currency
 
@@ -151,6 +157,9 @@ func save() -> Dictionary:
 	return {
 		"path": get_path(),
 		"selected_enclosure": selected_enclosure,
+		"_all_monster_types": _all_monster_types,
+		"_all_monster_preferences": _all_monster_preferences,
+		"currency_per_tick": currency_per_tick.array_to_num(),
 		"enclosure_cost": enclosure_cost.array_to_num()
 	}
 

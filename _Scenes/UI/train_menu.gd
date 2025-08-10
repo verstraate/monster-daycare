@@ -20,7 +20,7 @@ func _on_enclosure_changed(new_enclosure: Enclosure) -> void:
 	
 	_update_monsters()
 
-func _update_monsters() -> void:
+func _update_monsters(_monster: Monster = null) -> void:
 	var monsters_to_display: Array[Monster] = current_enclosure.monsters
 	
 	var to_display_length: int = len(monsters_to_display)
