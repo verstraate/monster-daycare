@@ -40,6 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CapacityContainer" type="Panel" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.84

@@ -11,7 +11,6 @@ var keys_to_ignore: Array[String] = [
 	"level",
 	"training_cost",
 	"_save_time",
-	"currency_per_tick",
 	"price"
 ]
 
@@ -86,8 +85,21 @@ func load_game() -> void:
 				new_object.adjust_money(afk_earnings.array_to_num())
 				continue
 			
-			if i == "enclosure_cost":
+			if i == "enclosure_cost" or i == "currency_per_tick":
 				_setup_idle_number(new_object, i, node_data)
+				continue
+			
+			if i == "_all_monster_types":
+				new_object = new_object as EnclosureManager
+				var _all_monster_types: Dictionary[Utils.MONSTER_TYPES, int] = {}
+				var _all_monster_preferences: Dictionary[Utils.MONSTER_TYPES, float] = {}
+				
+				for j in node_data[i]:
+					_all_monster_types[int(j)] = int(node_data["_all_monster_types"][j])
+					_all_monster_preferences[int(j)] = float(node_data["_all_monster_preferences"][j])
+				
+				new_object._all_monster_types = _all_monster_types
+				new_object._all_monster_preferences = _all_monster_preferences
 				continue
 			
 			if i == "locked_monsters":

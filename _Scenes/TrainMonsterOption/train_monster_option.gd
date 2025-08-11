@@ -13,7 +13,6 @@ var _cost_label: Label = $Info/Cost
 var _max_level_filter: ColorRect = $MaxLevelFilter
 
 var _monster: Monster
-var _training_value: IdleNumber
 
 func setup(new_monster: Monster) -> void:
 	_monster = new_monster
@@ -27,11 +26,11 @@ func setup(new_monster: Monster) -> void:
 		_cost_label.text = "$%s" % _monster.training_cost.display_value(2)
 	
 	_max_level_filter.visible = is_max_level
-	_max_level_filter.size = size
+	_max_level_filter.set_deferred("size", size)
 
 func _on_pressed() -> void:
 	if not Globals.money_manager.can_afford(_monster.training_cost):
 		return
 	
-	Globals.money_manager.adjust_money(_monster.training_cost.array_to_num())
+	Globals.money_manager.adjust_money("-%s" % _monster.training_cost.array_to_num())
 	Globals.game_manager.load_training(_monster)

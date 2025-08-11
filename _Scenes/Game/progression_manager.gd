@@ -14,7 +14,7 @@ func _ready() -> void:
 	for monster in locked_monsters:
 		_unlock_requirements[monster.id] = IdleNumber.new(monster.price)
 	
-	Globals.money_manager.money_updated.connect(check_for_unlocks)
+	SignalBus.money_updated.connect(check_for_unlocks)
 
 func check_for_unlocks(money: IdleNumber) -> void:
 	var monsters: Array[BaseMonster] = []

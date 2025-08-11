@@ -9,3 +9,5 @@ script = ExtResource("1_68g30")
 unique_name_in_owner = true
 wait_time = 0.1
 autostart = true
+
+[connection signal="timeout" from="Tick" to="." method="_on_tick_timeout"]

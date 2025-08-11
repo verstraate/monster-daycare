@@ -1,7 +1,6 @@
 class_name GameManager
 extends Node2D
 
-
 @onready
 var _save_game_timer: Timer = $SaveGame
 @onready
@@ -27,7 +26,7 @@ func _ready() -> void:
 	timer = get_tree().create_timer(load_time)
 	
 	SaveGame.load_game()
-	SaveGame.save_game() # Override current save for with idle earnings and updated values
+	SaveGame.save_game() # Override current save with idle earnings and updated values
 	
 	# If load_game takes longer than load_time, skip
 	if timer.time_left != 0:
@@ -37,7 +36,7 @@ func _ready() -> void:
 	
 	if len(Globals.enclosure_manager.enclosures) > 0:
 		var curr_enclosure_selected: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
-		Globals.enclosure_manager.enclosure_changed.emit(curr_enclosure_selected)
+		SignalBus.selected_enclosure_changed.emit(curr_enclosure_selected)
 	
 	Globals.ui_manager.update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	Globals.ui_manager.update_money_label(Globals.money_manager.get_money())
@@ -62,21 +61,19 @@ func load_training(monster_to_train: Monster) -> void:
 	training.position = training_pos
 	training.set_monster_in_training(monster_to_train)
 	
-	Globals.ui_manager.loading_timeout.connect(training.start)
-	
 	if timer.time_left > 0:
 		await timer.timeout
 	
+	SignalBus.loading_screen_timeout.connect(training.start)
 	Globals.ui_manager.toggle_loading(false)
 
 func complete_training() -> void:
-	Globals.ui_manager.loading_timeout.disconnect(training.start)
+	SignalBus.loading_screen_timeout.disconnect(training.start)
 	
 	timer = get_tree().create_timer(load_time / 2)
 	Globals.ui_manager.toggle_loading(true)
 	
-	var curr_enclosure_selected: Enclosure = Globals.enclosure_manager.enclosures[Globals.enclosure_manager.selected_enclosure]
-	curr_enclosure_selected.monsters_updated.emit()
+	SignalBus.monsters_updated.emit(null)
 	
 	training.queue_free()
 	SaveGame.save_game()

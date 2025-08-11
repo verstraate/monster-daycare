@@ -12,16 +12,12 @@ var _money: RichTextLabel = $%MoneyLabel
 var _enclosure_cost: Label = $%EnclosureCost
 
 @onready
-var _train_menu: TrainMenu = $%TrainMenu
-@onready
 var _train_menu_container: Button = $TrainMenuContainer
 
 var _loading_cycle_active: bool = true
 var _loading_cycle_duration: float = 1.0
 var _time_since_step: float = 0
 var _loading_step: int = 0
-
-signal loading_timeout
 
 func _ready() -> void:
 	if Globals.ui_manager != null and Globals.ui_manager != self:
@@ -30,10 +26,10 @@ func _ready() -> void:
 	
 	Globals.ui_manager = self
 	
-	Globals.money_manager.money_updated.connect(update_money_label)
+	SignalBus.money_updated.connect(update_money_label)
 	update_money_label(Globals.money_manager.get_money())
 	
-	Globals.enclosure_manager.cost_updated.connect(update_enclosure_cost_label)
+	SignalBus.enclosure_cost_updated.connect(update_enclosure_cost_label)
 	update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	
 	toggle_train_menu_visibility(false)
@@ -53,7 +49,7 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 	if not value:
 		_loading_label.text = "Done!"
 		await get_tree().create_timer(1.5).timeout
-		loading_timeout.emit()
+		SignalBus.loading_screen_timeout.emit()
 		layer = 1
 	else:
 		layer = 10
