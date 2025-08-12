@@ -3,7 +3,7 @@ class_name TrainMenu extends Panel
 const TRAIN_MONSTER_OPTION = preload("res://_Scenes/TrainMonsterOption/train_monster_option.tscn")
 
 @onready
-var _monsters_parent: HFlowContainer = $Monsters
+var _monsters_parent: Control = $Monsters
 
 var current_enclosure: Enclosure
 var _monsters_displayed: Array[TrainMonsterOption] = []
@@ -40,5 +40,5 @@ func _update_monsters(_monster: Monster = null) -> void:
 			_monsters_displayed[i].visible = false
 	
 	for i in range(to_display_length):
-		_monsters_displayed[i].setup(monsters_to_display[i])
+		_monsters_displayed[i].setup(monsters_to_display[i], i, to_display_length)
 		_monsters_displayed[i].visible = true

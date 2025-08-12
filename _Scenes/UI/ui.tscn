@@ -199,24 +199,29 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -240.0
-offset_right = 360.0
-offset_bottom = 240.0
+offset_left = -303.0
+offset_top = -202.0
+offset_right = 303.0
+offset_bottom = 202.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 240)
 theme = ExtResource("7_qjjww")
 script = ExtResource("11_8pj88")
 
-[node name="Monsters" type="HFlowContainer" parent="TrainMenuContainer/TrainMenu"]
+[node name="Monsters" type="Control" parent="TrainMenuContainer/TrainMenu"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.904
-anchor_bottom = 1.0
-offset_right = 0.119995
-alignment = 1
-last_wrap_alignment = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.67999
+offset_top = -0.160004
+offset_right = 2.67999
+offset_bottom = 0.160004
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CloseTrainMenu" type="Button" parent="TrainMenuContainer/TrainMenu"]
 texture_filter = 1
