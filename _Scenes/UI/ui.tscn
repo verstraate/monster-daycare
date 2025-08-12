@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://33dpkdbpx7lf"]
+[gd_scene load_steps=16 format=3 uid="uid://33dpkdbpx7lf"]
 
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="1_dxera"]
 [ext_resource type="Script" uid="uid://b4dg8jdvwdc7h" path="res://_Scenes/UI/ui_manager.gd" id="1_ofums"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://bdf53j15bvv1f" path="res://Scripts/Resources/Monsters/base_monster.gd" id="7_1j37f"]
 [ext_resource type="Theme" uid="uid://cm6g652rpvlgn" path="res://_Scenes/UI/train_monsters.tres" id="7_qjjww"]
 [ext_resource type="Resource" uid="uid://cwjm80eb4sc3s" path="res://Resources/Monsters/gaia.tres" id="8_66jej"]
+[ext_resource type="Script" uid="uid://k3wuwf8yu4gd" path="res://_Scenes/UI/monster_info.gd" id="11_0h4al"]
 [ext_resource type="Script" uid="uid://bc68hcsgpodg5" path="res://_Scenes/UI/train_menu.gd" id="11_8pj88"]
+[ext_resource type="Texture2D" uid="uid://nfnkhghw66gi" path="res://Assets/Sprites/Monsters/gaia.png" id="12_8pj88"]
 [ext_resource type="Theme" uid="uid://cknukvd8ogbbn" path="res://_Scenes/MainMenu/main_menu.tres" id="13_1g7en"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h4al"]
@@ -182,6 +184,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TrainMenuContainer" type="Button" parent="."]
+visible = false
 z_index = 5
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,26 +202,139 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -240.0
-offset_right = 360.0
-offset_bottom = 240.0
+offset_left = -303.0
+offset_top = -202.0
+offset_right = 303.0
+offset_bottom = 202.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 240)
 theme = ExtResource("7_qjjww")
 script = ExtResource("11_8pj88")
 
-[node name="Monsters" type="HFlowContainer" parent="TrainMenuContainer/TrainMenu"]
+[node name="Monsters" type="Control" parent="TrainMenuContainer/TrainMenu"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.904
-anchor_bottom = 1.0
-offset_right = 0.119995
-alignment = 1
-last_wrap_alignment = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.67999
+offset_top = -0.160004
+offset_right = 2.67999
+offset_bottom = 0.160004
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CloseTrainMenu" type="Button" parent="TrainMenuContainer/TrainMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 60.0
+grow_horizontal = 0
+pivot_offset = Vector2(50, 0)
+text = "X"
+
+[node name="MonsterInfo" type="Button" parent="."]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0hb4q")
+action_mode = 0
+
+[node name="InfoContainer" type="Panel" parent="MonsterInfo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.0
+offset_top = -202.0
+offset_right = 303.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 240)
+theme = ExtResource("7_qjjww")
+script = ExtResource("11_0h4al")
+
+[node name="MonsterData" type="VBoxContainer" parent="MonsterInfo/InfoContainer"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 303.0
+grow_vertical = 2
+
+[node name="Name" type="Label" parent="MonsterInfo/InfoContainer/MonsterData"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_dxera")
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 14
+theme_override_constants/shadow_outline_size = 14
+theme_override_font_sizes/font_size = 48
+text = "Gaia"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MonsterInfo/InfoContainer/MonsterData"]
+texture_filter = 1
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("12_8pj88")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Type" type="Label" parent="MonsterInfo/InfoContainer/MonsterData"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_dxera")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Earth"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonsterState" type="VBoxContainer" parent="MonsterInfo/InfoContainer"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 306.0
+offset_right = 560.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Level" type="Label" parent="MonsterInfo/InfoContainer/MonsterState"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_dxera")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "Level: 2/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Produce" type="Label" parent="MonsterInfo/InfoContainer/MonsterState"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_dxera")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "$100K/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseMonsterInfo" type="Button" parent="MonsterInfo/InfoContainer"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
@@ -265,3 +381,5 @@ autowrap_mode = 0
 [connection signal="pressed" from="InfoBar/TrainButton" to="." method="_on_train_button_pressed"]
 [connection signal="pressed" from="TrainMenuContainer" to="." method="_on_train_menu_container_pressed"]
 [connection signal="pressed" from="TrainMenuContainer/TrainMenu/CloseTrainMenu" to="." method="_on_close_train_menu_pressed"]
+[connection signal="pressed" from="MonsterInfo" to="." method="_on_monster_info_pressed"]
+[connection signal="pressed" from="MonsterInfo/InfoContainer/CloseMonsterInfo" to="." method="_on_close_monster_info_pressed"]

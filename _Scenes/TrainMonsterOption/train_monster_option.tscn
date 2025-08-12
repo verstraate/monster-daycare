@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://lpo0oimwllvt"]
+[gd_scene load_steps=6 format=3 uid="uid://lpo0oimwllvt"]
 
 [ext_resource type="Script" uid="uid://3720yursb7cx" path="res://_Scenes/TrainMonsterOption/train_monster_option.gd" id="1_ie6to"]
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="2_fcyq4"]
+[ext_resource type="Texture2D" uid="uid://nfnkhghw66gi" path="res://Assets/Sprites/Monsters/gaia.png" id="2_lf05j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie6to"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -14,47 +15,51 @@ Button/styles/normal = SubResource("StyleBoxFlat_ie6to")
 Button/styles/pressed = SubResource("StyleBoxFlat_ie6to")
 
 [node name="TrainMonsterOption" type="Button"]
-custom_minimum_size = Vector2(100, 120)
-anchors_preset = -1
-offset_right = 8.0
-offset_bottom = 54.0
+custom_minimum_size = Vector2(100, 163)
 theme = SubResource("Theme_fcyq4")
 script = ExtResource("1_ie6to")
 
 [node name="Info" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 163)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Name" type="Label" parent="Info"]
+[node name="Details" type="Label" parent="Info"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("2_fcyq4")
+text = "Gaia"
 horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="Icon" type="TextureRect" parent="Info"]
 texture_filter = 1
 layout_mode = 2
-size_flags_vertical = 4
+size_flags_vertical = 3
+texture = ExtResource("2_lf05j")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Level" type="Label" parent="Info"]
-layout_mode = 2
-size_flags_vertical = 8
-horizontal_alignment = 1
-
 [node name="Cost" type="Label" parent="Info"]
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("2_fcyq4")
+text = "$200"
 horizontal_alignment = 1
 
 [node name="MaxLevelFilter" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.0588235, 0.0745098, 0.12549, 0.470588)
 
 [node name="Label" type="Label" parent="MaxLevelFilter"]

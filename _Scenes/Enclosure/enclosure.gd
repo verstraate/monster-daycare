@@ -41,7 +41,6 @@ func try_add_monster(new_monster: Monster) -> bool:
 	monsters.append(new_monster)
 	
 	_update_capacity()
-	print('new monster')
 	SignalBus.monsters_updated.emit(new_monster)
 	return true
 
