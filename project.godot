@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Monster Daycare"
-config/version="1.3.0"
+config/version="1.4.0"
 run/main_scene="res://_Scenes/MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://Assets/Sprites/money.png"
