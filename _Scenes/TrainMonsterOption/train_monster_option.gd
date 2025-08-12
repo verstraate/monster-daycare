@@ -1,8 +1,6 @@
 class_name TrainMonsterOption extends Button
 
 @onready
-var _info: VBoxContainer = $Info
-@onready
 var _details_label: Label = $Info/Details
 @onready
 var _icon: TextureRect = $Info/Icon
