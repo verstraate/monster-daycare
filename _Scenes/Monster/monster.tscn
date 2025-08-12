@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bgt7k4r0y32f0" path="res://_Scenes/Monster/monster.gd" id="1_yjh7p"]
 
-[node name="Monster" type="TextureRect"]
+[node name="Monster" type="TextureButton"]
+y_sort_enabled = true
 texture_filter = 1
 offset_right = 100.0
 offset_bottom = 100.0
-expand_mode = 2
+stretch_mode = 5
 script = ExtResource("1_yjh7p")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

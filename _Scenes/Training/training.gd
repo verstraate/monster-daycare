@@ -78,6 +78,8 @@ func set_monster_in_training(new_monster: Monster) -> void:
 	
 	monster = _monster_in_training.duplicate()
 	add_child(monster)
+	if monster.get_script():
+		monster.set_script(null)
 	monster.position = Vector2(size.x / 2 - monster.size.x, size.y - monster.size.y * 3)
 	monster.scale = Vector2.ONE * 2
 

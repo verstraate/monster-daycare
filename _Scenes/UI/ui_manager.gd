@@ -13,6 +13,10 @@ var _enclosure_cost: Label = $%EnclosureCost
 
 @onready
 var _train_menu_container: Button = $TrainMenuContainer
+@onready
+var _monster_info: Button = $MonsterInfo
+
+signal monster_info_toggled(monster: Monster)
 
 var _loading_cycle_active: bool = true
 var _loading_cycle_duration: float = 1.0
@@ -32,7 +36,10 @@ func _ready() -> void:
 	SignalBus.enclosure_cost_updated.connect(update_enclosure_cost_label)
 	update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	
+	SignalBus.monster_pressed.connect(_on_monster_pressed)
+	
 	toggle_train_menu_visibility(false)
+	toggle_monster_info_visibility(false)
 
 func _process(delta: float) -> void:
 	if _loading_cycle_active:
@@ -65,6 +72,9 @@ func update_enclosure_cost_label(value: IdleNumber) -> void:
 func toggle_train_menu_visibility(value: bool) -> void:
 	_train_menu_container.visible = value
 
+func toggle_monster_info_visibility(value: bool) -> void:
+	_monster_info.visible = value
+
 func _on_train_button_pressed() -> void:
 	toggle_train_menu_visibility(true)
 
@@ -73,3 +83,12 @@ func _on_train_menu_container_pressed() -> void:
 
 func _on_close_train_menu_pressed() -> void:
 	toggle_train_menu_visibility(false)
+
+func _on_monster_pressed(monster: Monster) -> void:
+	toggle_monster_info_visibility(true)
+
+func _on_monster_info_pressed() -> void:
+	toggle_monster_info_visibility(false)
+
+func _on_close_monster_info_pressed() -> void:
+	toggle_monster_info_visibility(false)

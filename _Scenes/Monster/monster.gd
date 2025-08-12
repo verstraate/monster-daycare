@@ -1,5 +1,5 @@
 class_name Monster
-extends TextureRect
+extends TextureButton
 
 var monster_data: BaseMonster
 var produce: IdleNumber
@@ -13,5 +13,12 @@ func setup_monster(new_monster_data: BaseMonster = null):
 		training_cost = IdleNumber.new(monster_data.base_upgrade)
 	
 	if monster_data != null:
-		texture = monster_data.sprite
+		texture_normal = monster_data.sprite
+		texture_pressed = monster_data.sprite
+		texture_hover = monster_data.sprite
+		texture_disabled = monster_data.sprite
+		texture_focused = monster_data.sprite
 		name = monster_data.display_name
+
+func _on_pressed() -> void:
+	SignalBus.monster_pressed.emit(self)
