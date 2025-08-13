@@ -171,8 +171,6 @@ func _on_monster_added(new_monster: Monster, enclosure_index: int) -> void:
 		var power: int = max(0, monsters_of_type if i != monster_type else monsters_of_type - 1)
 		_all_monster_preferences[enclosure_index][monster_type] *= pow(1 + pref * 0.5, power)
 	
-	print("enclosure %d: " % enclosure_index, _all_monster_preferences[enclosure_index])
-	
 	_get_currency_per_tick()
 
 func _get_currency_per_tick() -> void:
