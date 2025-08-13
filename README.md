@@ -65,13 +65,16 @@
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Create monsters
-	- [x] Monster resources
-	- [x] Monster instance
-	- [x] Purchase a monster
-	- [x] Generate currency
-- [x] Create monster enclosures
-- [ ] Set up monster type preferences (between monsters in enclosure)
+- [x] Set up monster type preferences (between monsters in enclosure)
+- [ ] Set up monster moods
+  - [ ] Feed to increase
+  - [ ] Spawn food randomly
+- [ ] Add more types of training
+  - [ ] Multiple training variants for all monsters
+  - [ ] Training for specific types
+  - [ ] Select training at random
+- [ ] Add monster competitions (TBC)
+- [ ] Run random bonus events (TBC)
 
 See the [open issues](https://github.com/verstraate/mobile-project-1/issues) for a full list of proposed features (and known issues).
 
