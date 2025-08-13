@@ -5,8 +5,8 @@ const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
 var currency_per_tick: IdleNumber = IdleNumber.new()
-var _all_monster_types: Dictionary[Utils.MONSTER_TYPES, int] = {}
-var _all_monster_preferences: Dictionary[Utils.MONSTER_TYPES, float] = {}
+var _all_monster_types: Dictionary[int, Array] = {}
+var _all_monster_preferences: Dictionary[int, Array] = {}
 
 @export_group("Enclosure Cost")
 @export var enclosure_start_cost: String
@@ -94,6 +94,13 @@ func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	_tween.tween_property(enclosure, "position", Vector2.ZERO, swipe_duration)
 	
 	selected_enclosure = enclosures.size() - 1
+	
+	var new_types: Array = []
+	new_types.resize(len(Utils.MONSTER_TYPES))
+	new_types.fill(0.0)
+	_all_monster_types[selected_enclosure] = new_types.duplicate()
+	_all_monster_preferences[selected_enclosure] = new_types.duplicate()
+	
 	SignalBus.selected_enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _handle_swipe() -> void:
@@ -122,33 +129,60 @@ func _handle_swipe() -> void:
 func _generate_currency() -> void:
 	Globals.money_manager.adjust_money(currency_per_tick.array_to_num())
 
-func _on_monster_added(new_monster: Monster = null) -> void:
-	if new_monster == null:
+func _on_monster_added(new_monster: Monster, enclosure_index: int) -> void:
+	if new_monster == null || enclosure_index == -1:
 		_get_currency_per_tick()
 		return
 	
 	var monster_type: Utils.MONSTER_TYPES = new_monster.monster_data.type
-	if _all_monster_types.has(monster_type):
-		_all_monster_types[monster_type] += 1
+	if _all_monster_types[enclosure_index][monster_type] != 0:
+		_all_monster_types[enclosure_index][monster_type] += 1
 	else:
-		_all_monster_types[monster_type] = 1
+		_all_monster_types[enclosure_index][monster_type] = 1
 	
-	for type_to_compare in _all_monster_types:
-		if _all_monster_preferences.has(monster_type):
-			_all_monster_preferences[monster_type] *= pow(1 + 0.5 * Utils.TYPE_PREFERENCES[monster_type][type_to_compare], _all_monster_types[monster_type] - 1)
-		else:
-			_all_monster_preferences[monster_type] = 1
+	# NEW MONSTER INCREASES/DECREASES OTHER MONSTERS BY PREF
+	for i in range(len(_all_monster_types[enclosure_index])):
+		if i == monster_type or _all_monster_types[enclosure_index][i] == 0:
+			continue
+		
+		var pref: int = Utils.TYPE_PREFERENCES[i][monster_type]
+		if pref == 0:
+			continue
+			
+		if _all_monster_preferences[enclosure_index][i] == 0:
+			_all_monster_preferences[enclosure_index][i] = 1
+			continue
+		
+		_all_monster_preferences[enclosure_index][i] *= 1.5 if pref > 0 else 0.5
+	
+	# SET NEW MONSTER'S TYPE TO DEFAULT
+	_all_monster_preferences[enclosure_index][monster_type] = 1
+	
+	# OTHER MONSTERS INCREASE/DECREASE NEW MONSTER BY PREF
+	for i in range(len(_all_monster_types[enclosure_index])):
+		if _all_monster_types[enclosure_index][i] == 0:
+			continue
+		
+		var pref: int = Utils.TYPE_PREFERENCES[monster_type][i]
+		if pref == 0:
+			continue
+		
+		var monsters_of_type: int = _all_monster_types[enclosure_index][i]
+		var power: int = max(0, monsters_of_type if i != monster_type else monsters_of_type - 1)
+		_all_monster_preferences[enclosure_index][monster_type] *= pow(1 + pref * 0.5, power)
+	
+	print("enclosure %d: " % enclosure_index, _all_monster_preferences[enclosure_index])
 	
 	_get_currency_per_tick()
 
 func _get_currency_per_tick() -> void:
 	var currency: IdleNumber = IdleNumber.new()
 	
-	for enclosure in enclosures:
-		for i in range(len(enclosure.monsters)):
-			var monster: Monster = enclosure.monsters[i]
+	for i in range(len(enclosures)):
+		for j in range(len(enclosures[i].monsters)):
+			var monster: Monster = enclosures[i].monsters[j]
 			var currency_to_add: IdleNumber = IdleNumber.new(monster.produce.array_to_num())
-			currency_to_add.multiply(_all_monster_preferences[monster.monster_data.type])
+			currency_to_add.multiply(_all_monster_preferences[i][monster.monster_data.type])
 			currency.add(currency_to_add.array_to_num())
 	
 	currency_per_tick = currency

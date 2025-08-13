@@ -41,7 +41,7 @@ func try_add_monster(new_monster: Monster) -> bool:
 	monsters.append(new_monster)
 	
 	_update_capacity()
-	SignalBus.monsters_updated.emit(new_monster)
+	SignalBus.monsters_updated.emit(new_monster, Globals.enclosure_manager.selected_enclosure)
 	return true
 
 func _update_capacity() -> void:
