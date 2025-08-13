@@ -98,7 +98,6 @@ func load_game() -> void:
 					_all_monster_types[int(j)] = node_data["_all_monster_types"][j]
 					_all_monster_preferences[int(j)] = node_data["_all_monster_preferences"][j]
 				
-				
 				new_object._all_monster_types = _all_monster_types
 				new_object._all_monster_preferences = _all_monster_preferences
 				continue
