@@ -84,7 +84,7 @@ func _on_train_menu_container_pressed() -> void:
 func _on_close_train_menu_pressed() -> void:
 	toggle_train_menu_visibility(false)
 
-func _on_monster_pressed(monster: Monster) -> void:
+func _on_monster_pressed(_monster: Monster) -> void:
 	toggle_monster_info_visibility(true)
 
 func _on_monster_info_pressed() -> void:

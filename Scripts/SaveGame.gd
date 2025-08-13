@@ -91,12 +91,13 @@ func load_game() -> void:
 			
 			if i == "_all_monster_types":
 				new_object = new_object as EnclosureManager
-				var _all_monster_types: Dictionary[Utils.MONSTER_TYPES, int] = {}
-				var _all_monster_preferences: Dictionary[Utils.MONSTER_TYPES, float] = {}
+				var _all_monster_types: Dictionary[int, Array] = {}
+				var _all_monster_preferences: Dictionary[int, Array] = {}
 				
 				for j in node_data[i]:
-					_all_monster_types[int(j)] = int(node_data["_all_monster_types"][j])
-					_all_monster_preferences[int(j)] = float(node_data["_all_monster_preferences"][j])
+					_all_monster_types[int(j)] = node_data["_all_monster_types"][j]
+					_all_monster_preferences[int(j)] = node_data["_all_monster_preferences"][j]
+				
 				
 				new_object._all_monster_types = _all_monster_types
 				new_object._all_monster_preferences = _all_monster_preferences
