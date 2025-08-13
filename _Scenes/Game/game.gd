@@ -73,7 +73,7 @@ func complete_training() -> void:
 	timer = get_tree().create_timer(load_time / 2)
 	Globals.ui_manager.toggle_loading(true)
 	
-	SignalBus.monsters_updated.emit(null)
+	SignalBus.monsters_updated.emit(null, -1)
 	
 	training.queue_free()
 	SaveGame.save_game()
