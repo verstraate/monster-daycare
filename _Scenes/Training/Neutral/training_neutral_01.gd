@@ -17,7 +17,7 @@ var monster_tween: Tween
 var tween_duration: float
 
 var training_active: bool = false
-@export_range(1, 50) var training_length: int = 10
+@export_range(1, 50) var training_length: int = 5
 var training_remaining: int = 0
 
 @export_range(0, 10) var input_delay: float = 1

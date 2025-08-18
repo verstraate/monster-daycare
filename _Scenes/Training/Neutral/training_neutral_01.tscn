@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2o7uyspt6dgw"]
 
-[ext_resource type="Script" uid="uid://ba8vps65ruj1s" path="res://_Scenes/Training/training.gd" id="1_cboif"]
+[ext_resource type="Script" uid="uid://ba8vps65ruj1s" path="res://_Scenes/Training/Neutral/training_neutral_01.gd" id="1_cboif"]
 [ext_resource type="Texture2D" uid="uid://dvvogl73722t3" path="res://Assets/Sprites/enclosure_plains.png" id="2_h3a4d"]
 [ext_resource type="Theme" uid="uid://dw80nkeq5acxs" path="res://_Scenes/Game/main_ui.tres" id="3_mfvn2"]
 
@@ -27,7 +27,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cboif")
-training_length = 5
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

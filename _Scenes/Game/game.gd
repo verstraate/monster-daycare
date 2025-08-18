@@ -9,7 +9,7 @@ var _training_parent: CanvasLayer = $TrainingParent
 @export var load_time: float = 2
 var timer: SceneTreeTimer
 
-const TRAINING = preload("res://_Scenes/Training/training.tscn")
+const TRAINING = preload("res://_Scenes/Training/Neutral/training_neutral_01.tscn")
 var training: Training
 
 func _ready() -> void:
