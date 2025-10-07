@@ -16,6 +16,12 @@ var enclosure_cost: IdleNumber = IdleNumber.new("0")
 var enclosures: Array[Enclosure] = []
 var selected_enclosure: int = 0
 
+@onready
+var animation_timer: Timer = $MonsterMove
+var animation_chance: int = 30
+var max_animation_time: float
+var max_monster_pos_y: float
+
 @export_group("Swipe")
 @export_range(100, 500) var swipe_threshold: int
 @export_range(0, 1) var swipe_duration: float
@@ -34,6 +40,10 @@ func _ready() -> void:
 	
 	SignalBus.money_tick.connect(_generate_currency)
 	SignalBus.monsters_updated.connect(_on_monster_added)
+	SignalBus.selected_enclosure_changed.connect(get_max_monster_y)
+	
+	max_animation_time = animation_timer.wait_time / 2
+	animation_timer.timeout.connect(_run_animation)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("press") and not swiping:
@@ -60,6 +70,34 @@ func setup_enclosures_from_save() -> void:
 	
 	for enclosure in enclosures:
 		enclosure.setup_enclosure(null, true)
+
+func get_max_monster_y(new_enclosure: Enclosure) -> void:
+	max_monster_pos_y =  4.0 / 7.0 * new_enclosure.size.y + 100
+	print("max_monster_pos_y: %d" % max_monster_pos_y)
+
+func get_random_monster_pos(monster: Monster) -> Vector2:
+	return Vector2(Utils.rng.randf_range(10, enclosures[selected_enclosure].size.x - 10 - monster.size.x), Utils.rng.randf_range(max_monster_pos_y - 100, max_monster_pos_y))
+
+func _run_animation() -> void:
+	if len(enclosures) == 0:
+		return
+	
+	for monster in enclosures[selected_enclosure].monsters:
+		if monster.animate_tween and monster.animate_tween.is_running():
+			continue
+		
+		if Utils.rng.randi() % 100 < animation_chance:
+			var new_pos: Vector2 = get_random_monster_pos(monster)
+			var new_scale: Vector2 = Vector2.ONE * (new_pos.y / max_monster_pos_y)
+			
+			var max_distance_x: float = enclosures[selected_enclosure].size.x - 10 - monster.size.x
+			var distance_to_move: float = monster.position.distance_to(new_pos)
+			var time_to_tween: float = clampf(max_animation_time * (distance_to_move / max_distance_x), 0, max_animation_time)
+			
+			monster.animate_tween = create_tween()
+			monster.animate_tween.set_parallel()
+			monster.animate_tween.tween_property(monster, "position", new_pos, time_to_tween)
+			monster.animate_tween.tween_property(monster, "scale", new_scale, time_to_tween)
 
 func _add_enclosure(new_enclosure: BaseEnclosure = null) -> void:
 	if _tween != null and _tween.is_running():
@@ -192,7 +230,7 @@ func save() -> Dictionary:
 		"_all_monster_types": _all_monster_types,
 		"_all_monster_preferences": _all_monster_preferences,
 		"currency_per_tick": currency_per_tick.array_to_num(),
-		"enclosure_cost": enclosure_cost.array_to_num()
+		"enclosure_cost": enclosure_cost.array_to_num(),
 	}
 
 func _on_add_enclosure_pressed() -> void:

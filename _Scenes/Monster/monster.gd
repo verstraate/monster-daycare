@@ -1,6 +1,8 @@
 class_name Monster
 extends TextureButton
 
+var animate_tween: Tween
+
 var monster_data: BaseMonster
 var produce: IdleNumber
 var training_cost: IdleNumber
