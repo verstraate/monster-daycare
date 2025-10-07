@@ -55,7 +55,7 @@ func save() -> Dictionary:
 			"monster_data": monster.monster_data.resource_path,
 			"pos_x": monster.position.x,
 			"pos_y": monster.position.y,
-			"scale": monster.scale.x,
+			"scale": monster.scale.y,
 			"produce": monster.produce.array_to_num(),
 			"training_cost": monster.training_cost.array_to_num(),
 			"level": monster.level

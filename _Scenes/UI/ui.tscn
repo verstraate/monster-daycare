@@ -43,6 +43,10 @@ swipe_threshold = 200
 swipe_duration = 0.3
 metadata/_edit_use_anchors_ = true
 
+[node name="MonsterMove" type="Timer" parent="EnclosureManager"]
+wait_time = 10.0
+autostart = true
+
 [node name="InfoBar" type="Panel" parent="."]
 anchors_preset = -1
 anchor_right = 0.71
