@@ -4,10 +4,19 @@ extends Node2D
 @onready
 var _save_game_timer: Timer = $SaveGame
 @onready
+var _spawn_random_event_timer: Timer = $SpawnRandomEvent
+@onready
 var _training_parent: CanvasLayer = $TrainingParent
+@onready
+var _events: Node2D = $Events
 
-@export var load_time: float = 2
+@export var load_time: float = 2.0
 var timer: SceneTreeTimer
+
+var RANDOM_EVENT = preload("res://_Scenes/RandomEvent/random_event.tscn")
+@export_group("RandomEvent settings")
+@export_range(60.0, 600.0, 5.0) var min_event_cooldown: float
+@export_range(300.0, 900.0, 5.0) var max_event_cooldown: float
 
 const TRAINING = preload("res://_Scenes/Training/Neutral/training_neutral_01.tscn")
 var training: Training
@@ -44,7 +53,11 @@ func _ready() -> void:
 	Globals.ui_manager.toggle_loading(false)
 	
 	_save_game_timer.start()
+	_spawn_random_event_timer.start(_get_event_cooldown())
 	get_tree().paused = false
+
+func _get_event_cooldown() -> float:
+	return Utils.rng.randf_range(min_event_cooldown, max_event_cooldown)
 
 func load_training(monster_to_train: Monster) -> void:
 	_save_game_timer.stop()
@@ -88,3 +101,8 @@ func complete_training() -> void:
 func _on_save_game_timeout() -> void:
 	SaveGame.save_game()
 	_save_game_timer.start()
+
+func _on_spawn_random_event_timeout() -> void:
+	var event: RandomEvent = RANDOM_EVENT.instantiate()
+	_events.add_child(event)
+	_spawn_random_event_timer.start(_get_event_cooldown())

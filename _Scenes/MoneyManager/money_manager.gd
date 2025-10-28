@@ -5,7 +5,11 @@ extends Node2D
 var starting_money: String
 var _money: IdleNumber
 
-signal money_updated(value: IdleNumber)
+@export
+var event_overlay: CanvasLayer
+
+var current_multiplier: float = 1.0
+var multiplier_timer: SceneTreeTimer
 
 func _ready() -> void:
 	if Globals.money_manager != null and Globals.money_manager != self:
@@ -36,7 +40,7 @@ func adjust_money(value: String) -> void:
 
 func can_afford(money_to_check: IdleNumber) -> bool:
 	return _money.compare(money_to_check)
-	
+
 func try_purchase(price: String) -> bool:
 	if not can_afford(IdleNumber.new(price)):
 		return false
@@ -44,7 +48,25 @@ func try_purchase(price: String) -> bool:
 	adjust_money("-%s" % price)
 	
 	return true
+
+func generate_currency(currency: String) -> void:
+	var extra_currency: IdleNumber = IdleNumber.new(currency)
+	if current_multiplier != 1.0:
+		extra_currency.multiply(current_multiplier)
+	adjust_money(extra_currency.array_to_num())
+
+func start_currency_event(multiplier: float, time_to_run: float) -> void:
+	event_overlay.visible = true
+	current_multiplier = multiplier
+	multiplier_timer = get_tree().create_timer(time_to_run)
 	
+	if not multiplier_timer.timeout.is_connected(end_currency_event):
+		multiplier_timer.timeout.connect(end_currency_event)
+
+func end_currency_event() -> void:
+	event_overlay.visible = false
+	current_multiplier = 1.0
+
 func save() -> Dictionary:
 	return {
 		"path": get_path(),

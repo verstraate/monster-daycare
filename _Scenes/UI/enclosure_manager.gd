@@ -165,7 +165,7 @@ func _handle_swipe() -> void:
 	SignalBus.selected_enclosure_changed.emit(enclosures[selected_enclosure])
 
 func _generate_currency() -> void:
-	Globals.money_manager.adjust_money(currency_per_tick.array_to_num())
+	Globals.money_manager.generate_currency(currency_per_tick.array_to_num())
 
 func _on_monster_added(new_monster: Monster, enclosure_index: int) -> void:
 	if new_monster == null || enclosure_index == -1:

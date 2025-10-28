@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://4trcp5cfwoks"]
+
+[ext_resource type="Script" uid="uid://cn0o0s48ngkt5" path="res://_Scenes/RandomEvent/random_event.gd" id="1_qw2tx"]
+[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="2_bmbhg"]
+
+[node name="RandomEvent" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1024.0
+offset_bottom = -520.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qw2tx")
+min_reward_multiplier = 2.0
+max_reward_multiplier = 10.0
+max_reward_duration = 60.0
+
+[node name="EventButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("2_bmbhg")
+stretch_mode = 6
+
+[node name="Despawn" type="Timer" parent="."]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="pressed" from="EventButton" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
