@@ -8,7 +8,7 @@ var _spawn_random_event_timer: Timer = $SpawnRandomEvent
 @onready
 var _training_parent: CanvasLayer = $TrainingParent
 @onready
-var _events: Node2D = $Events
+var _events: CanvasLayer = $EventContainer
 
 @export var load_time: float = 2.0
 var timer: SceneTreeTimer
@@ -49,6 +49,7 @@ func _ready() -> void:
 	
 	Globals.ui_manager.update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	Globals.ui_manager.update_money_label(Globals.money_manager.get_money())
+	Globals.ui_manager.update_currency_per_tick_label(Globals.money_manager.get_currency_per_tick())
 	
 	Globals.ui_manager.toggle_loading(false)
 	

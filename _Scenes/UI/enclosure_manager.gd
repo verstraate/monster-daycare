@@ -4,7 +4,6 @@ extends Control
 const ENCLOSURE_SCENE = preload("res://_Scenes/Enclosure/enclosure.tscn")
 var _tween: Tween
 
-var currency_per_tick: IdleNumber = IdleNumber.new()
 var _all_monster_types: Dictionary[int, Array] = {}
 var _all_monster_preferences: Dictionary[int, Array] = {}
 
@@ -38,7 +37,6 @@ func _ready() -> void:
 	
 	Globals.enclosure_manager = self
 	
-	SignalBus.money_tick.connect(_generate_currency)
 	SignalBus.monsters_updated.connect(_on_monster_added)
 	SignalBus.selected_enclosure_changed.connect(get_max_monster_y)
 	
@@ -73,7 +71,6 @@ func setup_enclosures_from_save() -> void:
 
 func get_max_monster_y(new_enclosure: Enclosure) -> void:
 	max_monster_pos_y =  4.0 / 7.0 * new_enclosure.size.y + 100
-	print("max_monster_pos_y: %d" % max_monster_pos_y)
 
 func get_random_monster_pos(monster: Monster) -> Vector2:
 	return Vector2(Utils.rng.randf_range(10, enclosures[selected_enclosure].size.x - 10 - monster.size.x), Utils.rng.randf_range(max_monster_pos_y - 100, max_monster_pos_y))
@@ -164,9 +161,6 @@ func _handle_swipe() -> void:
 	selected_enclosure = next_enclosure
 	SignalBus.selected_enclosure_changed.emit(enclosures[selected_enclosure])
 
-func _generate_currency() -> void:
-	Globals.money_manager.generate_currency(currency_per_tick.array_to_num())
-
 func _on_monster_added(new_monster: Monster, enclosure_index: int) -> void:
 	if new_monster == null || enclosure_index == -1:
 		_get_currency_per_tick()
@@ -221,7 +215,7 @@ func _get_currency_per_tick() -> void:
 			currency_to_add.multiply(_all_monster_preferences[i][monster.monster_data.type])
 			currency.add(currency_to_add.array_to_num())
 	
-	currency_per_tick = currency
+	SignalBus.currency_per_tick_updated.emit(currency)
 
 func save() -> Dictionary:
 	return {
@@ -229,7 +223,6 @@ func save() -> Dictionary:
 		"selected_enclosure": selected_enclosure,
 		"_all_monster_types": _all_monster_types,
 		"_all_monster_preferences": _all_monster_preferences,
-		"currency_per_tick": currency_per_tick.array_to_num(),
 		"enclosure_cost": enclosure_cost.array_to_num(),
 	}
 

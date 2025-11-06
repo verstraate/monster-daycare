@@ -9,6 +9,8 @@ var _loading_label: RichTextLabel = $%LoadingLabel
 @onready
 var _money: RichTextLabel = $%MoneyLabel
 @onready
+var _currency_per_tick: Label = $%CurrencyPerTickLabel
+@onready
 var _enclosure_cost: Label = $%EnclosureCost
 
 @onready
@@ -31,12 +33,15 @@ func _ready() -> void:
 	Globals.ui_manager = self
 	
 	SignalBus.money_updated.connect(update_money_label)
+	SignalBus.currency_per_tick_updated.connect(update_currency_per_tick_label)
 	update_money_label(Globals.money_manager.get_money())
+	update_currency_per_tick_label(Globals.money_manager.get_currency_per_tick())
 	
 	SignalBus.enclosure_cost_updated.connect(update_enclosure_cost_label)
 	update_enclosure_cost_label(Globals.enclosure_manager.enclosure_cost)
 	
 	SignalBus.monster_pressed.connect(_on_monster_pressed)
+	SignalBus.event_started.connect(_on_event_started)
 	
 	toggle_train_menu_visibility(false)
 	toggle_monster_info_visibility(false)
@@ -65,6 +70,21 @@ func toggle_loading(value: bool = !_loading.visible) -> void:
 
 func update_money_label(value: IdleNumber) -> void:
 	_money.text = "$%s" % value.display_value(2)
+
+func update_currency_per_tick_label(value: IdleNumber) -> void:
+	print(value.array_to_num())
+	var temp_value: IdleNumber = IdleNumber.new(value.array_to_num())
+	temp_value.multiply(10.0)
+	
+	var display_value: String = temp_value.display_value(2)
+	_currency_per_tick.text = "+$%s/s" % display_value
+
+func _on_event_started(multiplier: float, _duration: float) -> void:
+	var currency: IdleNumber = Globals.money_manager.get_currency_per_tick()
+	var new_currency: IdleNumber = IdleNumber.new(currency.array_to_num())
+	new_currency.multiply(multiplier)
+	
+	update_currency_per_tick_label(new_currency)
 
 func update_enclosure_cost_label(value: IdleNumber) -> void:
 	_enclosure_cost.text = "$%s" % value.display_value(2)
