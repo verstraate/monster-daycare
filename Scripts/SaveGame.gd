@@ -80,12 +80,12 @@ func load_game() -> void:
 				var save_time: Dictionary = node_data["_save_time"]
 				var curr_time: Dictionary = Time.get_datetime_dict_from_system()
 				
-				var currency_per_tick: String = node_data["currency_per_tick"]
+				var currency_per_tick: String = node_data["_currency_per_tick"]
 				var afk_earnings: IdleNumber = _generate_afk_earnings(save_time, curr_time, currency_per_tick)
 				new_object.adjust_money(afk_earnings.array_to_num())
 				continue
 			
-			if i == "enclosure_cost" or i == "currency_per_tick":
+			if i == "enclosure_cost" or i == "_currency_per_tick":
 				_setup_idle_number(new_object, i, node_data)
 				continue
 			
@@ -186,7 +186,6 @@ func _generate_afk_earnings(save_time: Dictionary, curr_time: Dictionary, curren
 	var years: int = max(0, curr_time["year"] - save_time["year"])
 	
 	# CALCULATE EARNINGS
-	
 	second_total.multiply(seconds)
 	minute_total.multiply(minutes)
 	hour_total.multiply(hours)

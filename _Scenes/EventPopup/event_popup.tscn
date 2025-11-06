@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyyik5hm76y8e"]
+
+[ext_resource type="Script" uid="uid://do7rd6fe30udt" path="res://_Scenes/EventPopup/event_popup.gd" id="1_4mm0v"]
+[ext_resource type="Texture2D" uid="uid://baxrai53v1hmb" path="res://Assets/Sprites/money.png" id="2_pg7ek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pg7ek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vrto4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fs3gl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gbgvd"]
+
+[node name="EventPopup" type="Button"]
+process_mode = 3
+custom_minimum_size = Vector2(75, 75)
+anchors_preset = -1
+anchor_right = 0.0868056
+anchor_bottom = 0.154321
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pg7ek")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vrto4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fs3gl")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gbgvd")
+action_mode = 0
+script = ExtResource("1_4mm0v")
+metadata/_edit_use_anchors_ = true
+
+[node name="Despawn" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[node name="IconContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="IconContainer"]
+texture_filter = 1
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pg7ek")
+expand_mode = 3
+stretch_mode = 6
+
+[connection signal="pressed" from="." to="." method="_on_event_pressed"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]

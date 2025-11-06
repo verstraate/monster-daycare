@@ -106,12 +106,16 @@ func complete() -> void:
 	_monster_in_training.level += 1
 	_monster_in_training.training_cost.multiply(training_cost_multiplier)
 	
-	var old_produce: String = _monster_in_training.produce.display_value(2)
-	_monster_in_training.produce.multiply(2)
-	var new_produce: String = _monster_in_training.produce.display_value(2)
+	var curr_produce: IdleNumber = IdleNumber.new(_monster_in_training.produce.array_to_num())
+	curr_produce.multiply(10.0)
+	var old_produce: String = curr_produce.display_value(2)
 	
-	old_produce_label.text = "OLD: $%s" % old_produce
-	new_produce_label.text = "NEW: $%s" % new_produce
+	_monster_in_training.produce.multiply(2)
+	curr_produce.multiply(2)
+	var new_produce: String = curr_produce.display_value(2)
+	
+	old_produce_label.text = "OLD: $%s/s" % old_produce
+	new_produce_label.text = "NEW: $%s/s" % new_produce
 	
 	training_finished.visible = true
 	

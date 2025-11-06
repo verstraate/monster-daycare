@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://pjns3nq2o8h"]
+
+[ext_resource type="Shader" uid="uid://b5te6gf3jypid" path="res://_Scenes/RandomEvent/event_overlay.gdshader" id="1_fpp7l"]
+
+[resource]
+shader = ExtResource("1_fpp7l")
+shader_parameter/_VignetteColor = Color(1, 0.566667, 0, 1)
+shader_parameter/_VignetteAlpha = 1.0
+shader_parameter/_VignetteDarken = 0.75
+shader_parameter/_VignetteFalloff = 3.2
+shader_parameter/_VignetteFalloffIncrease = 0.3
+shader_parameter/_VignetteStrength = 1.0
